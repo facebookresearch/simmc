@@ -134,7 +134,7 @@ Evaluation reports are saved in the `/mm_dst/results` folder as JSON files. Belo
 
 ## Rules for Sub-task #3 Submissions
 * Disallowed input per each turn: `belief_state`, `system_transcript`, `system_transcript_annotated`, `state_graph_1`, `state_graph_2`, and anything from future turns.
-* If you would like to use any other external resources, please consult with the track organizers (simmc@fb.com). Generally, we allow the use of pre-trained language models such as BERT, GPT-2, etc.
+* If you would like to use any other external resources, please consult with the track organizers (simmc@fb.com). Generally, we allow the use of publicly available pre-trained language models, such as BERT, GPT-2, etc.
 
 [dstc9]:https://sites.google.com/dstc.community/dstc9/home
 [simmc_arxiv]:https://arxiv.org/abs/2006.01460
