@@ -40,3 +40,5 @@ $ git clone https://github.com/facebookresearch/simmc.git
 ## Rules for Sub-task #2 Submissions
 * Disallowed Input: `belief_state`, `system_transcript`, `system_transcript_annotated`, `state_graph_1`, `state_graph_2`, and anything from future turns.
 * If you would like to use any other external resources, please consult with the track organizers (simmc@fb.com). Generally, we allow the use of pre-trained language models such as BERT, GPT-2, etc.
+
+[simmc_arxiv]:https://arxiv.org/abs/2006.01460
