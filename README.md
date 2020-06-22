@@ -5,7 +5,7 @@ Welcome to the Situated Interactive Multimodal Conversation (SIMMC) Track for [D
 The SIMMC challenge aims to lay the foundations for the real-world assistant agents that can handle multimodal inputs, and perform multimodal actions.
 We thus focus on **task-oriented** dialogs that encompass a **situated** multimodal user context in the form of a co-observed image or virtual reality (VR) environment.
 The context is **dynamically** updated on each turn based on the user input and the assistant action.
-Our challenge focuses on our SIMMC datasets on two shopping domains:
+Our challenge focuses on our SIMMC datasets, both of which are shopping domains:
 (a) furniture (grounded in a shared virtual environment) and, 
 (b) fashion (grounded in an evolving set of images).   
 
