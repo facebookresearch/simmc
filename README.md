@@ -1,4 +1,3 @@
-
 # Situated Interactive MultiModal Conversation (SIMMC) Challenge 2020
 
 Welcome to the Situated Interactive Multimodal Conversation (SIMMC) Track for [DSTC9][dstc9] 2020.
@@ -47,21 +46,21 @@ Our challenge focuses on our SIMMC datasets, both of which are shopping domains:
 
 We present three sub-tasks primarily aimed at replicating human-assistant actions in order to enable rich and interactive shopping scenarios.
 
-| Sub-Task #1 | Multimodal Action Prediction |
+| Sub-Task #1 | [Multimodal Action Prediction](mm_action_prediction) |
 |---------|---------------------------------------------------------------------------------------------------------------------------------------|
 | Goal | To predict the correct Assistant API action(s) (classification) |
 | Input | Current user utterance, Dialog context, Multimodal context |
 | Output |  Structural API (action & arguments) |
 | Metrics |  Perplexity, Mean Average Precision |
 
-| Sub-Task #2 | Multimodal Dialog Response Generation & Retrieval  |
+| Sub-Task #2 | [Multimodal Dialog Response Generation & Retrieval](mm_response_generation)  |
 |---------|---------------------------------------------------------------------------------------------------------------------------------------|
 | Goal | To generate Assistant responses or retrieve from a candidate pool  |
 | Input | Current user utterance, Dialog context, Multimodal context, (Ground-truth API Calls) |
 | Output | Assistant response utterance |
 | Metrics | Generation: BLEU-4, Retrieval: Accuracy@k, Entropy |
 
-| Sub-Task #3 | Multimodal Dialog State Tracking (MM-DST) |
+| Sub-Task #3 | [Multimodal Dialog State Tracking (MM-DST)](mm_dst) |
 |---------|---------------------------------------------------------------------------------------------------------------------------------------|
 | Goal | To track user belief states across multiple turns |
 | Input | Current user utterance, Dialogue context, Multimodal context |
