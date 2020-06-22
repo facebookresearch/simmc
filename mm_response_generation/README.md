@@ -13,7 +13,7 @@ For more details on the task definition and the baseline models we provide, plea
 ```
 @article{moon2020situated,
   title={Situated and Interactive Multimodal Conversations},
-  author={Moon, Seungwhan and Kottur, Satwik and Crook, Paul A and De, Ankita and Poddar, Shivani and Levin, Theodore and Whitney, David and Difranco, Daniel and Beirami, Ahmad and Cho, Eunjoon and others},
+  author={Moon, Seungwhan and Kottur, Satwik and Crook, Paul A and De, Ankita and Poddar, Shivani and Levin, Theodore and Whitney, David and Difranco, Daniel and Beirami, Ahmad and Cho, Eunjoon and Subba, Rajen and Geramifard, Alborz},
   journal={arXiv preprint arXiv:2006.01460},
   year={2020}
 }
@@ -29,7 +29,7 @@ $ git clone https://github.com/facebookresearch/simmc.git
 
 * Install the required Python packages:
   * [Python 3.6+](https://www.python.org/downloads/)
-  * [PyTorch 1.5+)](https://pytorch.org/get-started/locally/#start-locally)
+  * [PyTorch 1.5+](https://pytorch.org/get-started/locally/#start-locally)
   * [Transformers](https://huggingface.co/transformers/installation.html)
 
 **NOTE**: We recommend installation in a virtual environment ([user guide](https://packaging.python.org/guides/installing-using-pip-and-virtual-environments/)). Create a new virtual environment and activate it prior to installing the packages. 

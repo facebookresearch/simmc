@@ -1,3 +1,4 @@
+
 # Situated Interactive MultiModal Conversation (SIMMC) Challenge 2020
 
 Welcome to the Situated Interactive Multimodal Conversation (SIMMC) Track for [DSTC9][dstc9] 2020.
@@ -35,7 +36,7 @@ Our challenge focuses on our SIMMC datasets, both of which are shopping domains:
 | **Date** | **Milestone** |
 | :--: | :-- |
 | June 22, 2020 | Training & development data released |
-| Sept 28, 2020  | Test data released, End of Challenge Phase 1 |
+| Sept 28, 2020  | Test-Std data released, End of Challenge Phase 1 |
 | Oct 5, 2020 | Entry submission deadline, End of Challenge Phase 2 |
 | Oct 12, 2020  | Final results announced |
 
@@ -105,7 +106,7 @@ We will announce the final results and the winners on Oct 12.
 ## Contact
 
 ### Questions related to SIMMC Track, Data, and Baselines
-Please contact simmc@fb.com, or leave comments in the 
+Please contact simmc@fb.com, or leave comments in the Github repository.
 
 ### DSTC Mailing List
 If you want to get the latest updates about DSTC9, join the [DSTC mailing list](https://groups.google.com/a/dstc.community/forum/#!forum/list/join)
@@ -113,13 +114,20 @@ If you want to get the latest updates about DSTC9, join the [DSTC mailing list](
 
 ## Citations
 
-If you want to publish experimental results with our datasets or use the baseline models, please cite the following article:
+If you want to publish experimental results with our datasets or use the baseline models, please cite the following articles:
 ```
 @article{moon2020situated,
   title={Situated and Interactive Multimodal Conversations},
-  author={Moon, Seungwhan and Kottur, Satwik and Crook, Paul A and De, Ankita and Poddar, Shivani and Levin, Theodore and Whitney, David and Difranco, Daniel and Beirami, Ahmad and Cho, Eunjoon and others},
+  author={Moon, Seungwhan and Kottur, Satwik and Crook, Paul A and De, Ankita and Poddar, Shivani and Levin, Theodore and Whitney, David and Difranco, Daniel and Beirami, Ahmad and Cho, Eunjoon and Subba, Rajen and Geramifard, Alborz},
   journal={arXiv preprint arXiv:2006.01460},
   year={2020}
+}
+
+@article{crook2019simmc,
+  title={SIMMC: Situated Interactive Multi-Modal Conversational Data Collection And Evaluation Platform},
+  author={Crook, Paul A and Poddar, Shivani and De, Ankita and Shafi, Semir and Whitney, David and Geramifard, Alborz and Subba, Rajen},
+  journal={arXiv preprint arXiv:1911.02690},
+  year={2019}
 }
 ```
 **NOTE**: The [paper][simmc_arxiv] above describes in detail the datasets, the NLU/NLG/Coref annotations, and some of the baselines we provide in this challenge. The paper reports the results from an earlier version of the dataset and with different train-dev-test splits, hence the baseline performances on the challenge resources will be slightly different. 

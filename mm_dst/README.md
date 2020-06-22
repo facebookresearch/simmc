@@ -9,7 +9,7 @@ For more details on the task definition and the baseline models we provide, plea
 ```
 @article{moon2020situated,
   title={Situated and Interactive Multimodal Conversations},
-  author={Moon, Seungwhan and Kottur, Satwik and Crook, Paul A and De, Ankita and Poddar, Shivani and Levin, Theodore and Whitney, David and Difranco, Daniel and Beirami, Ahmad and Cho, Eunjoon and others},
+  author={Moon, Seungwhan and Kottur, Satwik and Crook, Paul A and De, Ankita and Poddar, Shivani and Levin, Theodore and Whitney, David and Difranco, Daniel and Beirami, Ahmad and Cho, Eunjoon and Subba, Rajen and Geramifard, Alborz},
   journal={arXiv preprint arXiv:2006.01460},
   year={2020}
 }
@@ -26,7 +26,7 @@ $ git clone https://github.com/facebookresearch/simmc.git
 
 * Install the required Python packages:
   * [Python 3.6+](https://www.python.org/downloads/)
-  * [PyTorch 1.5+)](https://pytorch.org/get-started/locally/#start-locally)
+  * [PyTorch 1.5+](https://pytorch.org/get-started/locally/#start-locally)
   * [Transformers](https://huggingface.co/transformers/installation.html)
 
 **NOTE**: We recommend installation in a virtual environment ([user guide](https://packaging.python.org/guides/installing-using-pip-and-virtual-environments/)). Create a new virtual environment and activate it prior to installing the packages. 
@@ -39,13 +39,13 @@ $ git clone https://github.com/facebookresearch/simmc.git
 1. **Preprocess** the datasets to reformat the data for GPT-2 input.
  
 ```
-./mm_dst/run_preprocess_gpt2.sh
+$ ./mm_dst/run_preprocess_gpt2.sh
 ```
  
 The shell script above repeats the following for all {train|dev|devtest} splits and both {furniture|fashion} domains.
 
 ```
-python -m gpt2_dst.scripts.preprocess_input \
+$ python -m gpt2_dst.scripts.preprocess_input \
     --input_path_json={path_dir}/data/simmc-fashion/fashion_train_dials.json \
     --output_path_predict={path_dir}/mm_dst/gpt2_dst/data/fashion/fashion_train_dials_predict.txt \
     --output_path_target={path_dir}/mm_dst/gpt2_dst/data/fashion/fashion_train_dials_target.txt \
@@ -57,13 +57,13 @@ python -m gpt2_dst.scripts.preprocess_input \
 2. **Train** the baseline model
  
 ```
-./mm_dst/run_train_gpt2.sh
+$ ./mm_dst/run_train_gpt2.sh
 ```
  
 The shell script above repeats the following for both {furniture|fashion} domains.
  
 ```
-python -m gpt2_dst.scripts.run_language_modeling \
+$ python -m gpt2_dst.scripts.run_language_modeling \
     --output_dir={path_dir}/save/fashion \
     --model_type=gpt2 \
     --model_name_or_path=gpt2 \
@@ -84,12 +84,12 @@ python -m gpt2_dst.scripts.run_language_modeling \
 3. **Generate** prediction for `devtest` data
  
 ```
-./mm_dst/run_generate_gpt2.sh
+$ ./mm_dst/run_generate_gpt2.sh
 ```
  
 The shell script above repeats the following for both {furniture|fashion} domains.
 ```
-python -m gpt2_dst.scripts.run_generation \
+$ python -m gpt2_dst.scripts.run_generation \
     --model_type=gpt2 \
     --model_name_or_path={path_dir}/mm_dst/gpt2_dst/save/furniture/ \
     --num_return_sequences=1 \
@@ -111,7 +111,7 @@ The generation results are saved in the `/mm_dst/results` folder. Change the `pa
 4. **Evaluate** predictions for `devtest` data
  
 ```
-./mm_dst/run_evaluate_gpt2.sh
+$ ./mm_dst/run_evaluate_gpt2.sh
 ```
 
 The shell script above repeats the following for both {furniture|fashion} domains.
