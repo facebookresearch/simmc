@@ -1,6 +1,6 @@
 # Situated Interactive MultiModal Conversation (SIMMC) Challenge 2020
 
-Welcome to the Situated Interactive Multimodal Conversation (SIMMC) Track for [DSTC9][dstc9] 2020.
+Welcome to the Situated Interactive Multimodal Conversations (SIMMC) Track for [DSTC9][dstc9] 2020.
 
 The SIMMC challenge aims to lay the foundations for the real-world assistant agents that can handle multimodal inputs, and perform multimodal actions.
 We thus focus on **task-oriented** dialogs that encompass a **situated** multimodal user context in the form of a co-observed image or virtual reality (VR) environment.
@@ -108,7 +108,7 @@ We will announce the final results and the winners on Oct 12.
 Please contact simmc@fb.com, or leave comments in the Github repository.
 
 ### DSTC Mailing List
-If you want to get the latest updates about DSTC9, join the [DSTC mailing list](https://groups.google.com/a/dstc.community/forum/#!forum/list/join)
+If you want to get the latest updates about DSTC9, join the [DSTC mailing list](https://groups.google.com/a/dstc.community/forum/#!forum/list/join).
 
 
 ## Citations
