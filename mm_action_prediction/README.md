@@ -1,6 +1,6 @@
 # DSTC Track 4: SIMMC | Sub-Task #1: Multimodal Assistant API Prediction
 
-This directory contains the code and the scripts for running the baseline models for Sub-Task #2: Multimodal Assistant API Prediction.
+This directory contains the code and the scripts for running the baseline models for Sub-Task #1: Multimodal Assistant API Prediction.
 
 This subtask involves predicting the assistant actions through API calls along with the necessary arguments using dialog history, multimodal context, and the current user utterance as inputs.
 For example, enquiring about an attribute value (e.g., price) for a shared furniture item is realized through a call to the *SpecifyInfo* API with the price argument.
