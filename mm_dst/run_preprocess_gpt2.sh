@@ -2,7 +2,7 @@
 if [[ $# -lt 1 ]]
 then
     PATH_DIR=$(realpath .)
-    PATH_DATA_DIR=$(realpath data/v4)
+    PATH_DATA_DIR=$(realpath ../data)
 else
     PATH_DIR=$(realpath "$1")
     PATH_DATA_DIR=$(realpath "$2")

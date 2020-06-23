@@ -92,6 +92,10 @@ We will announce the final results and the winners on Oct 12.
 ### (2) Download Datasets and Code
 
 * Git clone our repository to download the datasets and the code. You may use the provided baselines as a starting point to develop your models.
+```
+$ git lfs install
+$ git clone https://github.com/facebookresearch/simmc.git
+```
 
 ### (3) Reporting Results for Challenge Phase 1
 * Submit your model prediction results on the `devtest` set at simmc@fb.com (more instructions to follow later). 

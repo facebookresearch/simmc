@@ -27,6 +27,7 @@ For more details on the task definition and the baseline models we provide, plea
 
 * Git clone the repository:
 ```
+$ git lfs install
 $ git clone https://github.com/facebookresearch/simmc.git
 ```
 **NOTE**: We recommend installation in a virtual environment ([user guide](https://packaging.python.org/guides/installing-using-pip-and-virtual-environments/)). Create a new virtual environment and activate it prior to installing the packages. 

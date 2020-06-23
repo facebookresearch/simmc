@@ -24,6 +24,7 @@ For more details on the task definition and the baseline models we provide, plea
 
 * Git clone the repository:
 ```
+$ git lfs install
 $ git clone https://github.com/facebookresearch/simmc.git
 ```
 

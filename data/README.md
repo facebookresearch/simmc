@@ -46,6 +46,18 @@ We randomly split each of our SIMMC-Furniture and SIMMC-Fashion datasets into fo
 * **Test-Dev** is the publicly available test set to measure model performance and report results outside the challenge.  
 * **Test-Std** is used as the main test set for evaluation for Challenge Phase 2 (to be released on Sept 28).
 
+## Download the Datasets
+We are hosting our datasets in this Github Repository (with [Git LFS](https://git-lfs.github.com/)).
+First, install Git LFS
+```
+$ git lfs install
+```
+
+Clone our repository to download both the dataset and the code:
+```
+$ git clone https://github.com/facebookresearch/simmc.git
+```
+
 ## Overview of the Dataset Repository 
 
 The data are made available for each `domain` (`simmc_furniture` | `simmc_fashion`) in the following files:
@@ -107,7 +119,7 @@ For each `{train|dev|devtest}` split, the JSON data (`./{domain}/{train|dev|devt
 ]
 }
 ```
-The data can be processed with respective data readers / preprocessing scripts for each sub-task (please refer to the respective README documents). Each sub-task will describe which fields can be used as 
+The data can be processed with respective data readers / preprocessing scripts for each sub-task (please refer to the respective README documents). Each sub-task will describe which fields can be used as input.
 
 We also release the metadata for each object referred in the dialog data:
 ```
