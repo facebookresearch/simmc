@@ -1,4 +1,4 @@
-# Situated Interactive MultiModal Conversation (SIMMC) Challenge 2020
+# Situated Interactive MultiModal Conversations (SIMMC) Challenge 2020
 
 Welcome to the Situated Interactive Multimodal Conversations (SIMMC) Track for [DSTC9][dstc9] 2020.
 
