@@ -67,7 +67,8 @@ The data are made available for each `domain` (`simmc_furniture` | `simmc_fashio
 - list of dialog IDs per split: ./{domain}/{train|dev|devtest|test}_dialog_ids
 
 [Metadata]
-- JSON format: ./{domain}/metadata.json
+- Fashion metadta: ./simmc_fashion/metadata.json
+- Furniture metadata: ./simmc_furniture/metadata.csv
 - images: ./simmc-furniture/figures/{object_id}.png
 ```
 **NOTE**: The test set will be made available after DSTC9.
@@ -123,12 +124,23 @@ The data can be processed with respective data readers / preprocessing scripts f
 
 We also release the metadata for each object referred in the dialog data:
 ```
+<fashion_metadata.json>
 {
     <int> object_id: {
         “metadata”: {dict},
         “url”: <str> source image
     }, // end of an object
 }
+
+<furniture_metadata.csv>
+columns:
+- product_name
+- product_description
+- product_thumbnail_image_url
+- material
+- color
+- obj ({object_id}.zip)
+...
 ```
 Attributes for each object either pulled from the original sources or annotated manually.
 Note that some of the catalog-specific attributes (e.g. availableSizes, brand, etc.) were randomly and synthetically generated. 
