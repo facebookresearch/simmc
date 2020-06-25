@@ -142,5 +142,6 @@ columns:
 - obj ({object_id}.zip)
 ...
 ```
-Attributes for each object either pulled from the original sources or annotated manually.
-Note that some of the catalog-specific attributes (e.g. availableSizes, brand, etc.) were randomly and synthetically generated. 
+Attributes for each object either pulled from the original sources or annotated manually. Note that some of the catalog-specific attributes (e.g. availableSizes, brand, etc.) were randomly and synthetically generated. 
+
+Each item in a catalog metadata has a unique `<int> object_id`. `dialog_coref_map` defines the mapping from the `local_idx` (local to each dialog), to its canonical `object_id` reference, for each dialog. This `local_idx` is used in `belief_state` as an object slot. For example, given a `dialog_coref_map = {0: 123, 1: 234, 2: 345}` -- the belief state: `{‘act’: ‘DA:REQUEST:ADD_TO_CART’, ‘slots’: [‘O’: ‘OBJECT_2’]}` would indicate this particular dialog act performed upon `OBJECT_2` (`2 == local_idx`), which has a canonical reference to an object with `object_id: 345`. We are including this information in case you want to refer to the additional information provided in the `metadata.{json|csv}` file. 
