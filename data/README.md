@@ -67,8 +67,8 @@ The data are made available for each `domain` (`simmc_furniture` | `simmc_fashio
 - list of dialog IDs per split: ./{domain}/{train|dev|devtest|test}_dialog_ids
 
 [Metadata]
-- Fashion metadta: ./simmc_fashion/metadata.json
-- Furniture metadata: ./simmc_furniture/metadata.csv
+- Fashion metadta: ./simmc_fashion/fashion_metadata.json
+- Furniture metadata: ./simmc_furniture/furniture_metadata.csv
 - images: ./simmc-furniture/figures/{object_id}.png
 ```
 **NOTE**: The test set will be made available after DSTC9.
