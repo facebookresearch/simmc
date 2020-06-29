@@ -67,7 +67,8 @@ The data are made available for each `domain` (`simmc_furniture` | `simmc_fashio
 - list of dialog IDs per split: ./{domain}/{train|dev|devtest|test}_dialog_ids
 
 [Metadata]
-- JSON format: ./{domain}/metadata.json
+- Fashion metadta: ./simmc_fashion/fashion_metadata.json
+- Furniture metadata: ./simmc_furniture/furniture_metadata.csv
 - images: ./simmc-furniture/figures/{object_id}.png
 ```
 **NOTE**: The test set will be made available after DSTC9.
@@ -123,12 +124,24 @@ The data can be processed with respective data readers / preprocessing scripts f
 
 We also release the metadata for each object referred in the dialog data:
 ```
+<fashion_metadata.json>
 {
     <int> object_id: {
         “metadata”: {dict},
         “url”: <str> source image
     }, // end of an object
 }
+
+<furniture_metadata.csv>
+columns:
+- product_name
+- product_description
+- product_thumbnail_image_url
+- material
+- color
+- obj ({object_id}.zip)
+...
 ```
-Attributes for each object either pulled from the original sources or annotated manually.
-Note that some of the catalog-specific attributes (e.g. availableSizes, brand, etc.) were randomly and synthetically generated. 
+Attributes for each object either pulled from the original sources or annotated manually. Note that some of the catalog-specific attributes (e.g. availableSizes, brand, etc.) were randomly and synthetically generated. 
+
+Each item in a catalog metadata has a unique `<int> object_id`. `dialog_coref_map` defines the mapping from the `local_idx` (local to each dialog), to its canonical `object_id` reference, for each dialog. This `local_idx` is used in `belief_state` as an object slot. For example, given a `dialog_coref_map = {0: 123, 1: 234, 2: 345}` -- the belief state: `{‘act’: ‘DA:REQUEST:ADD_TO_CART’, ‘slots’: [‘O’: ‘OBJECT_2’]}` would indicate this particular dialog act performed upon `OBJECT_2` (`2 == local_idx`), which has a canonical reference to an object with `object_id: 345`. We are including this information in case you want to refer to the additional information provided in the `metadata.{json|csv}` file. 
