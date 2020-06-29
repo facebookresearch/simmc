@@ -172,10 +172,11 @@ def convert_json_to_flattened(
 
 def represent_visual_objects(visual_objects):
     # Stringify visual objects (JSON)
-    s = ''
     target_attributes = ['pos', 'color', 'type', 'class_name', 'decor_style']
+
+    list_str_objects = []
     for obj_name, obj in visual_objects.items():
-        s += obj_name + ' :'
+        s = obj_name + ' :'
         for target_attribute in target_attributes:
             if target_attribute in obj:
                 target_value = obj.get(target_attribute)
@@ -183,8 +184,10 @@ def represent_visual_objects(visual_objects):
                     pass
                 else:
                     s += f' {target_attribute} {str(target_value)}'
+        list_str_objects.append(s)
 
-    return f'{START_OF_MULTIMODAL_CONTEXTS} {s} {END_OF_MULTIMODAL_CONTEXTS}'
+    str_objects = ' '.join(list_str_objects)
+    return f'{START_OF_MULTIMODAL_CONTEXTS} {str_objects} {END_OF_MULTIMODAL_CONTEXTS}'
 
 
 def parse_flattened_results_from_file(path):

@@ -2,7 +2,7 @@
 
 This directory contains the code and the scripts for running the baseline models for Sub-Task #3: Multimodal DST.
 
-The Multimodal Dialog State Tracking (MM-DST) task involves systematically tracking the attributes of dialog act labels cumulative across multiple turns. 
+The Multimodal Dialog State Tracking (MM-DST) task involves systematically tracking the attributes of dialog act labels cumulative across multiple turns.
 Multimodal belief states at each turn should encode sufficient information for handling user utterances in the downstream dialog components (e.g. Dialog Policy).
 
 For more details on the task definition and the baseline models we provide, please refer to our SIMMC paper:
@@ -14,7 +14,7 @@ For more details on the task definition and the baseline models we provide, plea
   year={2020}
 }
 ```
-**NOTE**: The [paper][simmc_arxiv] reports the results from an earlier version of the dataset and with different train-dev-test splits, hence the baseline performances on the challenge resources will be slightly different. 
+**NOTE**: The [paper][simmc_arxiv] reports the results from an earlier version of the dataset and with different train-dev-test splits, hence the baseline performances on the challenge resources will be slightly different.
 
 
 ## Installation (Same across all sub-tasks)
@@ -30,7 +30,7 @@ $ git clone https://github.com/facebookresearch/simmc.git
   * [PyTorch 1.5+](https://pytorch.org/get-started/locally/#start-locally)
   * [Transformers](https://huggingface.co/transformers/installation.html)
 
-**NOTE**: We recommend installation in a virtual environment ([user guide](https://packaging.python.org/guides/installing-using-pip-and-virtual-environments/)). Create a new virtual environment and activate it prior to installing the packages. 
+**NOTE**: We recommend installation in a virtual environment ([user guide](https://packaging.python.org/guides/installing-using-pip-and-virtual-environments/)). Create a new virtual environment and activate it prior to installing the packages.
 
 
 ## Run Baselines
@@ -38,11 +38,12 @@ $ git clone https://github.com/facebookresearch/simmc.git
 ### Baseline: GPT-2 Based DST
 
 1. **Preprocess** the datasets to reformat the data for GPT-2 input.
- 
+
 ```
-$ ./mm_dst/run_preprocess_gpt2.sh
+$ cd mm_dst
+$ ./run_preprocess_gpt2.sh
 ```
- 
+
 The shell script above repeats the following for all {train|dev|devtest} splits and both {furniture|fashion} domains.
 
 ```
@@ -54,15 +55,15 @@ $ python -m gpt2_dst.scripts.preprocess_input \
     --len_context=2 \
     --use_multimodal_contexts=1 \
 ```
- 
+
 2. **Train** the baseline model
- 
+
 ```
-$ ./mm_dst/run_train_gpt2.sh
+$ ./run_train_gpt2.sh
 ```
- 
+
 The shell script above repeats the following for both {furniture|fashion} domains.
- 
+
 ```
 $ python -m gpt2_dst.scripts.run_language_modeling \
     --output_dir={path_dir}/save/fashion \
@@ -79,15 +80,15 @@ $ python -m gpt2_dst.scripts.run_language_modeling \
     --per_gpu_train_batch_size=4 \
     --per_gpu_eval_batch_size=4 \
     #--no_cuda
- 
+
 ```
- 
+
 3. **Generate** prediction for `devtest` data
- 
+
 ```
-$ ./mm_dst/run_generate_gpt2.sh
+$ ./run_generate_gpt2.sh
 ```
- 
+
 The shell script above repeats the following for both {furniture|fashion} domains.
 ```
 $ python -m gpt2_dst.scripts.run_generation \
@@ -99,20 +100,20 @@ $ python -m gpt2_dst.scripts.run_generation \
     --prompts_from_file={path_dir}/mm_dst/gpt2_dst/data/furniture/furniture_devtest_dials_predict.txt \
     --path_output={path_dir}/mm_dst/gpt2_dst/results/furniture/furniture_devtest_dials_predicted.txt
 ```
- 
+
 Here is an example output:
 ```
 System : Yes, here's another one you might like. User : Oh yeah I think my niece would really like that. Does it come in any other colors?  System : I'm sorry I don't have that information. User : Ah well. I like this color. I'd like to go ahead and buy it. Can you add it to my cart please?  => Belief State :
  DA:INFORM:PREFER:JACKET  [ fashion-O_2  = obj ] DA:REQUEST:ADD_TO_CART:JACKET  [ fashion-O_2  = obj ] <EOB>  Of course, you now have this
 ```
- 
+
 The generation results are saved in the `/mm_dst/results` folder. Change the `path_output` to a desired path accordingly.
- 
- 
+
+
 4. **Evaluate** predictions for `devtest` data
- 
+
 ```
-$ ./mm_dst/run_evaluate_gpt2.sh
+$ ./run_evaluate_gpt2.sh
 ```
 
 The shell script above repeats the following for both {furniture|fashion} domains.
