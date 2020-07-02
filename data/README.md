@@ -126,6 +126,7 @@ For each `{train|dev|devtest}` split, the JSON data (`./{domain}/{train|dev|devt
 The data can be processed with respective data readers / preprocessing scripts for each sub-task (please refer to the respective README documents). Each sub-task will describe which fields can be used as input.
 
 **NOTES**
+
 `visual_objects` refer to the list of objects and their visual attributes that are shown to the user at each given turn (via a VR environment or an image). 
 ```
 {
