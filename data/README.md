@@ -69,7 +69,6 @@ The data are made available for each `domain` (`simmc_furniture` | `simmc_fashio
 [Metadata]
 - Fashion metadta: ./simmc_fashion/fashion_metadata.json
 - Furniture metadata: ./simmc_furniture/furniture_metadata.csv
-- images: ./simmc-furniture/figures/{object_id}.png
 ```
 **NOTE**: The test set will be made available after DSTC9.
 
