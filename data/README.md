@@ -100,13 +100,16 @@ For each `{train|dev|devtest}` split, the JSON data (`./{domain}/{train|dev|devt
           ...
         ],
         “domain”: <str>,
+        “raw_assistant_keystrokes”: <dict>,
         “state_graph_{idx}”: <dict>,
+        “syste_belief_state”: <dict>,
         “system_transcript”: <str>,
         “system_transcript_annotated”: <str>,
         “transcript”: <str>,
         “transcript_annotated”: <str>,
         “turn_idx”: <int>,
-        “turn_label”: [ <dict> ]
+        “turn_label”: [ <dict> ],
+        “visual_objects”: <dict>
       }, // end of a turn (always sorted by turn_idx)
       ...
     ],
@@ -121,6 +124,34 @@ For each `{train|dev|devtest}` split, the JSON data (`./{domain}/{train|dev|devt
 }
 ```
 The data can be processed with respective data readers / preprocessing scripts for each sub-task (please refer to the respective README documents). Each sub-task will describe which fields can be used as input.
+
+**NOTES**
+`visual_objects` refer to the list of objects and their visual attributes that are shown to the user at each given turn (via a VR environment or an image). 
+```
+{
+    <str> obj_name: {
+        <str> attribute_name: <list> or <str> attribute_values
+    }
+}
+```
+
+`state_graph_{idx}` refers to the graph representation of the cumulative dialog and the multimodal contexts known to the user, each at a different phase during the dialog (e.g. via a multimodal action of showing items, an assistant providing information, a user providing preferences, etc.). 
+- state_graph_0: initial state before the start of the user utterance
+- state_graph_1: state modified after the user utterance 
+- state_graph_2: final state modified after the assistant utterance & assistant action.
+
+Participants may use this information for inspection, or as additional training signals for some of the sub-tasks (but not at inference time). `belief_state`, `system_beilef_state`, and `visual_objects` provide the same information. 
+
+Each state graph is represented as follows:
+```
+{
+    <str> obj_name: {
+        <str> attribute_name: <list> or <str> attribute_values
+    }
+}
+```
+
+`raw_assistant_keystrokes` are the raw UI interactions made by the human Assistant (wizard) using the Unity interface during data collection. We distil target actions for the action prediction task (sub-task #1) from these raw keystrokes and NLU/NLG annotation
 
 We also release the metadata for each object referred in the dialog data:
 ```
