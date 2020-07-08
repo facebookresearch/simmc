@@ -1,0 +1,39 @@
+{
+  "actions": [
+    {
+        "id": 0,
+        "name": "SearchFurniture",
+        "attributes": ["color", "furnitureType"]
+    },
+    {
+        "id": 1,
+        "name": "SpecifyInfo",
+        "attributes": ["matches"]
+    },
+    {
+        "id": 2,
+        "name": "FocusOnFurniture",
+        "attributes": ["position"]
+    },
+    {
+        "id": 3,
+        "name": "Rotate",
+        "attributes": ["direction"]
+    },
+    {
+        "id": 4,
+        "name": "NavigateCarousel",
+        "attributes": ["navigate_direction"]
+    },
+    {
+        "id": 5, 
+        "name": "AddToCart",
+        "attributes": []
+    },
+    {
+        "id": 6, 
+        "name": "None",
+        "attributes": []
+    }
+  ]
+}

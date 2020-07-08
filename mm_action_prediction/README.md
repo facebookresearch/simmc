@@ -10,9 +10,35 @@ A comprehensive set of APIs for our SIMMC dataset is given in the [paper][simmc_
 Currently, we evaluate action prediction as a round-wise, multiclass classification problem over the set of APIs, and measure the *accuracy* of the most **dominant action**. 
 In addition, we also use *action perplexity* (defined as the exponential of the mean loglikelihood of the dominant action) to allow situations where several actions are equally valid in a given context. We also measure the correctness of the predicted action (API) arguments using attribute *accuracy*.
 
+The code to evaluate Sub-Task #1 is given in `tools/action_evaluation.py`.
+The model outputs are expected in the following format:
+
+```
+[
+	{
+		"dialog_id": ...,  
+		"predictions": [
+			{
+				"action": <predicted_action>,
+				"action_log_prob": {
+					<action_token>: <action_log_prob>,
+					...
+				},
+				"attributes": {
+					<attribute_label>: <attribute_val>,
+					...
+				}
+			}
+		]
+	}
+]
+```
+
+
 **NOTE**: We plan to extend the Multimodal Assistant API Prediction from the most dominant assistant action to allow the prediction of a series of multiple actions per turn. Please follow the [**Latest News**](https://github.com/facebookresearch/simmc/#latest-news) section in the main README of the repository for updates.
 
 For more details on the task definition and the baseline models we provide, please refer to our SIMMC paper:
+
 ```
 @article{moon2020situated,
   title={Situated and Interactive Multimodal Conversations},
@@ -37,11 +63,119 @@ $ git clone https://github.com/facebookresearch/simmc.git
   * [PyTorch 1.5+](https://pytorch.org/get-started/locally/#start-locally)
   * [Transformers](https://huggingface.co/transformers/installation.html)
 
-## Run Baselines
-Will be updated soon, please follow the [**Latest News**](https://github.com/facebookresearch/simmc/#latest-news) section in the main README of the repository for updates.
+## Baselines
+The baselines for API Prediction (Sub-Task #1) and Assistant Response Generation & Retrieval (Sub-Task #2) 
+are jointly learnt.
+For these baselines, the following are the additional dependencies:
+
+```
+pip install absl-py
+pip install numpy
+pip install json
+pip install nltk
+pip install spacy
+```
+Code also uses NLTK's `en_vectors_web_lg` dataset for GloVE embeddings. To install: 
+
+```
+python -m spacy download en_vectors_web_lg
+```
+
+### Overview
+
+Contains the following baselines models:
+
+1. History-agnostic Encoder (HAE)
+2. Hierarchical Recurrent Encoder (HRE)
+3. Memory Network Encoder (MN)
+4. Transformer-based History-agnostic Encoder (T-HAE)
+5. TF-IDF-based Encoder (TF-IDF)
+6. LSTM-based Language Model (LSTM)
+
+Please see our [paper][simmc_arxiv] for more details about the models.
+
+
+### Code Structure
+
+* `options.py`: Command line arguments to control behavior
+* `train_simmc_agent.py`: Trains SIMMC baselines
+* `eval_simmc_agent.py` or `eval_genie.py`: Evaluates trained checkpoints
+* `loaders/`: Dataloaders for SIMMC
+* `models/`: Model files
+	* `assistant.py`: SIMMC Assistant Wrapper Class
+	* `encoders/`: Different types of encoders
+		* `history_agnostic.py`
+		* `hierarchical_recurrent.py`
+		* `memory_network.py`
+		* `tf_idf_encoder.py`
+	* `decoder.py`: Response decoder, language model with LSTM or Transformers
+	* `action_executor.py`: Learns action and action attributes
+	* `carousel_embedder.py`: Learns multimodal embedding for furniture
+	* `user_memory_embedder.py`: Learns multimodal embedding for fashion
+	* `positional_encoding.py`: Positional encoding unit for transformers
+	* `self_attention.py`: Self attention model unit
+	* `{fashion|furniture}_model_metainfo.json`: Model action/attribute configurations for SIMMC
+* `tools/`: Supporting scripts for preprocessing and other utilites
+* `scripts/`: Bash scripts to run preprocessing, training, evaluation
+
+### Pretraining
+
+Run `scripts/preprocess_simmc.sh` with appropriate `$DOMAIN` (either "furniture" or "fashion") to
+run through the following steps:
+
+1. Extract supervision for **dominant** Assistant Action API
+2. Extract word vocabulary from the *train* split
+3. Read and embed the shopping assets into a feature vector
+4. Convert all the above information into a multimodal numpy input array for dataloader consumption
+5. Extract action attribute vocabulary from train split
+
+Please see `scripts/preprocess_simmc.sh` to better understand the inputs/outputs for each
+of the above steps.
+
+
+### Training and Evaluation
+
+To train a model or evaluate a saved checkpoints, please check examples in 
+`scripts/train_simmc_model.sh`. 
+
+You can also train all the above baselines at once using `scripts/train_all_simmc_models.sh`.
+For description and usage of necessary options/flags, please refer to `options.py` or one of the above two
+scripts.
+
+### Results
+
+The baselines trained through the code obtain the following results for Sub-Task #1.
+
+**SIMMC-Furniture**
+
+| Model  |     Action Accuracy      | Action Perplexity | Attribute Accuracy |
+|----------| :-------------: | :------: | :------: |
+| TF-IDF | 76.7 | 2.44 | 38.6 |
+| HAE    | 78.8 | 1.69 | 34.6 |        
+| HRE    | 79.4 | 1.69 | 33.2 |
+| MN     | 78.5 | 1.70 | 36.9 |        
+| T-HAE  | 77.6 | 1.80 | 38.7 |
+
+**SIMMC-Furniture**
+
+| Model  |     Action Accuracy      | Action Perplexity | Attribute Accuracy |
+|----------| :-------------: | :------: | :------: |
+| TD-IDF | 77.6 | 3.61 | 48.7 |
+| HAE    | 81.5 | 1.71 | 53.7 |
+| HRE    | 81.2 | 1.78 | 53.7 |
+| MN     | 81.3 | 1.81 | 53.5 |
+| T-HAE  | 80.7 | 1.86 | 54.3 |
+
 
 ## Rules for Sub-task #1 Submissions
 * Disallowed Input: `belief_state`, `system_transcript`, `system_transcript_annotated`, `state_graph_1`, `state_graph_2`, and anything from future turns.
 * If you would like to use any other external resources, please consult with the track organizers (simmc@fb.com). Generally, we allow the use of publicly available pre-trained language models, such as BERT, GPT-2, etc.
 
 [simmc_arxiv]:https://arxiv.org/abs/2006.01460
+
+
+
+[1]: https://drive.google.com/file/d/0Bx4CHsnRHDmJLWVObHBtcnBYVFA1dUVCY2ZwRUFvMWx0clVj/view
+[2]: https://www.dropbox.com/sh/bivp8lvsy3ff9x5/AACBLGJ2gR1qmz4x_4f6PuNIa?dl=0
+[3]: https://our.internmc.facebook.com/intern/wiki/PyTorch/Using_PyTorch/PyTorch+DevGPU+Conda/
+[4]: https://pytorch.org/

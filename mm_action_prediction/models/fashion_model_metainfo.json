@@ -1,0 +1,29 @@
+{
+  "actions": [
+    {
+        "name": "SearchMemory", 
+        "id": 0, 
+        "attributes": ["attributes"]
+    },
+    {
+        "name": "SearchDatabase",
+        "id": 1,
+        "attributes": ["attributes"]
+    },
+    {
+        "name": "SpecifyInfo",
+        "id": 2,
+        "attributes": ["attributes"]
+    },
+    {
+        "name": "AddToCart",
+        "id": 3,
+        "attributes": []
+    },
+    {
+        "name": "None",
+        "id": 4,
+        "attributes": []
+    }
+  ]
+}

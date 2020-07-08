@@ -8,3 +8,9 @@ data/simmc_furniture/furniture_test_dials.json filter=lfs diff=lfs merge=lfs -te
 data/simmc_furniture/furniture_train_dials.json filter=lfs diff=lfs merge=lfs -text
 data/simmc_fashion/fashion_metadata.json filter=lfs diff=lfs merge=lfs -text
 data/simmc_furniture/furniture_metadata.csv filter=lfs diff=lfs merge=lfs -text
+data/simmc_fashion/fashion_dev_dials_retrieval_candidates.json filter=lfs diff=lfs merge=lfs -text
+data/simmc_fashion/fashion_devtest_dials_retrieval_candidates.json filter=lfs diff=lfs merge=lfs -text
+data/simmc_fashion/fashion_train_dials_retrieval_candidates.json filter=lfs diff=lfs merge=lfs -text
+data/simmc_furniture/furniture_train_dials_retrieval_candidates.json filter=lfs diff=lfs merge=lfs -text
+data/simmc_furniture/furniture_dev_dials_retrieval_candidates.json filter=lfs diff=lfs merge=lfs -text
+data/simmc_furniture/furniture_devtest_dials_retrieval_candidates.json filter=lfs diff=lfs merge=lfs -text
