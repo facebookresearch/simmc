@@ -21,7 +21,7 @@ Our challenge focuses on our SIMMC datasets, both of which are shopping domains:
 
 * **[June 22, 2020]** Challenge announcement. Training / development datasets are released.
 * **[July 8, 2020]** Evaluation scripts and code to train baselines for 
-Sub-Task #1, Sub-Task #2 released released.
+Sub-Task #1, Sub-Task #2 released.
 
 ## Important Links
 
