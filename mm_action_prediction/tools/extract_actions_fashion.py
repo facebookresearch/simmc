@@ -131,6 +131,11 @@ def extract_info_attributes(round_datum):
             ii in intent
             for ii in ("DA:ASK:GET", "DA:ASK:CHECK", "DA:INFORM:GET")
         ):
+            # If there is no attribute added, default to info.
+            if "." not in intent:
+                get_attribute_matches.append("info")
+                continue
+
             attribute = intent.split(".")[-1]
             if attribute == "info":
                 new_matches = [
