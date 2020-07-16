@@ -8,7 +8,34 @@ A comprehensive set of APIs for our SIMMC dataset is given in the [paper][simmc_
 
 ## Evaluation
 Currently, we evaluate action prediction as a round-wise, multiclass classification problem over the set of APIs, and measure the *accuracy* of the most **dominant action**. 
-In addition, we also use *action perplexity* (defined as the exponential of the mean loglikelihood of the dominant action) to allow situations where several actions are equally valid in a given context. We also measure the correctness of the predicted action (API) arguments using attribute *accuracy*.
+In addition, we also use *action perplexity* (defined as the exponential of the mean loglikelihood of the dominant action) to allow situations where several actions are equally valid in a given context.
+We also measure the correctness of the predicted action (API) arguments using attribute *accuracy* (for Furniture) and *f1 score* (for Fashion).
+Specifically, the following API classes and attributes are evaluated.
+
+**SIMMC-Furniture**
+|  API   |  API Attributes |
+|:------:| :--------: |
+| `SearchFurniture`  | `furnitureType`, `color` |
+| `FocusOnFurniture` | `position` | 
+| `SpecifyInfo` | `attributes`|
+| `Rotate` | `direction`|
+| `NavigateCarousel` | `navigateDirection` |
+| `AddToCart` | - |
+| `None` | - |
+
+Each of the above attributes is a categorical variable, modeled as multiclass classification problem, and evaluated using attribute accuracy.
+**Note:** `minPrice` and `maxPrice` attributes corresponding to the `SpecifyInfo` action for Furniture are excluded in the current evaluation.
+
+**SIMMC-Fashion**
+| API  |   API Attributes |
+|:--------: | :------: |
+| `SearchDatabase` | `attributes` |
+| `SearchMemory` | `attributes` |
+| `SpecifyInfo`| `attributes` |
+| `AddToCart` | - |
+| `None` | - |
+
+Each of the attributes takes multiple values from a fixed set, modeled as multilabel classification problem, and evaluated using attribute F1 score.
 
 The code to evaluate Sub-Task #1 is given in `tools/action_evaluation.py`.
 The model outputs are expected in the following format:
