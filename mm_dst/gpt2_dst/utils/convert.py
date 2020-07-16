@@ -236,10 +236,11 @@ def parse_flattened_result(to_parse):
             # to_parse: 'DIALOG_ACT_1 : [ SLOT_NAME = SLOT_VALUE, ... ] ...'
             to_parse = splits[0].strip()
 
-            d = {}
             for dialog_act in dialog_act_regex.finditer(to_parse):
-                d['act'] = dialog_act.group(1)
-                d['slots'] = []
+                d = {
+                    'act': dialog_act.group(1),
+                    'slots': []
+                }
 
                 for slot in slot_regex.finditer(dialog_act.group(2)):
                     d['slots'].append(

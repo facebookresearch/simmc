@@ -137,6 +137,14 @@ def load_and_cache_examples(args, tokenizer, evaluate=False):
     else:
         dataset = TextDataset(tokenizer, args, file_path=file_path, block_size=args.block_size)
 
+    # Unknown issues have been reported around not being able to handle incomplete batches (e.g. w/ older CUDA 9.2)
+    # Uncomment the following if you encounter an issue, as a workaround.
+    # Alternatively, --nocuda could avoid this issue too.
+    #n = len(dataset) % args.per_gpu_train_batch_size
+    #if n != 0:
+    #    print("Truncating from %d examples" % len(dataset.examples))
+    #    dataset.examples = dataset.examples[:-n]
+    #    print("Truncating to %d examples" % len(dataset.examples))
     return dataset
 
 

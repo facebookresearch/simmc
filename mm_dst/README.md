@@ -129,10 +129,10 @@ Evaluation reports are saved in the `/mm_dst/results` folder as JSON files. Belo
 
 | Baseline | Dialog Act F1 | Slot F1 |
 |--------|-------|-------|
-| GPT2 - Furniture (text-only) | 75.0 | 50.5 |
-| GPT2 - Furniture (multimodal) | 74.1 | 60.2 |
-| GPT2 - Fashion (text-only) | 56.5 | 37.3 |
-| GPT2 - Fashion (multimodal) | 59.1 | 43.5 |
+| GPT2 - Furniture (text-only) | 70.0 | 51.7 |
+| GPT2 - Furniture (multimodal) | 68.2 | 62.4 |
+| GPT2 - Fashion (text-only) | 43.9 | 39.9 |
+| GPT2 - Fashion (multimodal) | 44.3 | 46.6 |
 
 ## Rules for Sub-task #3 Submissions
 * Disallowed input per each turn: `belief_state`, `system_transcript`, `system_transcript_annotated`, `state_graph_1`, `state_graph_2`, and anything from future turns.
