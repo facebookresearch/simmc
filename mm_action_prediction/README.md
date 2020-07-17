@@ -183,7 +183,7 @@ The baselines trained through the code obtain the following results for Sub-Task
 | MN     | 78.5 | 1.70 | 36.9 |        
 | T-HAE  | 77.6 | 1.80 | 38.7 |
 
-**SIMMC-Furniture**
+**SIMMC-Fashion**
 
 | Model  |     Action Accuracy      | Action Perplexity | Attribute Accuracy |
 |----------| :-------------: | :------: | :------: |
