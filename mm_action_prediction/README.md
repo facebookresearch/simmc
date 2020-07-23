@@ -102,10 +102,17 @@ pip install json
 pip install nltk
 pip install spacy
 ```
-Code also uses NLTK's `en_vectors_web_lg` dataset for GloVE embeddings. To install: 
+Code also uses spaCy's `en_vectors_web_lg` dataset for GloVE embeddings. To install:
 
 ```
 python -m spacy download en_vectors_web_lg
+```
+Code also uses NLTK's `punkt`. To install:
+
+```
+python
+>>> import nltk
+>>> nltk.download('punkt')
 ```
 
 ### Overview
