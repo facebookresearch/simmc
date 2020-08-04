@@ -3,13 +3,11 @@
 Author(s): Satwik Kottur
 """
 
-
-from absl import app, flags
 import collections
 import json
 
 import numpy as np
-
+from absl import app, flags
 
 FLAGS = flags.FLAGS
 flags.DEFINE_string(
@@ -72,6 +70,10 @@ def evaluate_action_prediction(gt_actions, model_actions):
                     gt_key_vals = supervision[key]
                     model_key_vals = round_datum["attributes"][key]
                     if not len(gt_key_vals):
+                        if not len(model_key_vals):
+                            matches['attributes'].append(1.0)
+                        else:
+                            matches['attributes'].append(0.)
                         continue
                     # For fashion, this is a list -- multi label prediction.
                     if isinstance(gt_key_vals, list):
