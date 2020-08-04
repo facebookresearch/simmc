@@ -125,14 +125,20 @@ python -m gpt2_dst.scripts.evaluate \
 
 ```
 
-Evaluation reports are saved in the `/mm_dst/results` folder as JSON files. Below is the summary:
+Evaluation reports are saved in the `/mm_dst/results` folder as JSON files.
+
+*Important*: For any of the models you build, please make sure that you use the function `simmc.mm_dst.utils.evaluate_dst.evaluate_from_flat_list` to obtain the evaluation reports.
+
+Please also note that the GPT2 fine-tuning is highly sensitive to the batch size (which `n_gpu` of your machine may affect), hence it may need some hyperparameter tuning to obtain the best results (and avoid over/under fitting). Please feel free to change the hyperparameter of the default settings (provided) to compare results.
+
+Below is the summary of the published models we provide:
 
 | Baseline | Dialog Act F1 | Slot F1 |
 |--------|-------|-------|
-| GPT2 - Furniture (text-only) | 70.0 | 51.7 |
-| GPT2 - Furniture (multimodal) | 68.2 | 62.4 |
-| GPT2 - Fashion (text-only) | 43.9 | 39.9 |
-| GPT2 - Fashion (multimodal) | 44.3 | 46.6 |
+| GPT2 - Furniture (text-only) | 69.9 | 52.5 |
+| GPT2 - Furniture (multimodal) | 69.5 | 63.9 |
+| GPT2 - Fashion (text-only) | 61.2 | 52.1 |
+| GPT2 - Fashion (multimodal) | 61.1 | 60.6 |
 
 ## Rules for Sub-task #3 Submissions
 * Disallowed input per each turn: `belief_state`, `system_transcript`, `system_transcript_annotated`, `state_graph_1`, `state_graph_2`, and anything from future turns.
