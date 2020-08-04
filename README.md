@@ -85,13 +85,13 @@ We will announce the final results and the winners on Oct 12.
 
 ## Challenge Instructions
 
-### (1) Registration
+### (1) Challenge Registration
 
 * Fill out [this form](https://forms.gle/jdT79eBeySHVoa1QA) to register at DSTC9. Check “**Track 4: Visually Grounded Dialog Track**” along with other tracks you are participating in.
 
-* After the registration, we highly encourage the participants to notify the SIMMC Track Organizers (simmc@fb.com) of their registration, to help us communicate any future updates on the codebase, the datasets, and the challenge track.
-
 ### (2) Download Datasets and Code
+
+* Irrespective of participation in the challenge, we'd like to encourge those interested in this dataset to complete this [optional survey] (https://oculus.qualtrics.com/jfe/form/SV_1AlazoSV7iwepZH). This will also help us communicate any future updates on the codebase, the datasets, and the challenge track.
 
 * Git clone our repository to download the datasets and the code. You may use the provided baselines as a starting point to develop your models.
 ```
