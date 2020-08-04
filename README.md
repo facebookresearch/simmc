@@ -91,7 +91,7 @@ We will announce the final results and the winners on Oct 12.
 
 ### (2) Download Datasets and Code
 
-* Irrespective of participation in the challenge, we'd like to encourge those interested in this dataset to complete this [optional survey] (https://oculus.qualtrics.com/jfe/form/SV_1AlazoSV7iwepZH). This will also help us communicate any future updates on the codebase, the datasets, and the challenge track.
+* Irrespective of participation in the challenge, we'd like to encourge those interested in this dataset to complete this [optional survey](https://oculus.qualtrics.com/jfe/form/SV_1AlazoSV7iwepZH). This will also help us communicate any future updates on the codebase, the datasets, and the challenge track.
 
 * Git clone our repository to download the datasets and the code. You may use the provided baselines as a starting point to develop your models.
 ```
