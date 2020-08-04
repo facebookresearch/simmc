@@ -60,7 +60,8 @@ The model outputs are expected in the following format:
 	}
 ]
 ```
-
+where `attribute_label` corresponds to the API attribute(s) predicted for each API (refer to the table above) and
+`attribute_val` contains the list of values taken by the key `attribute_label`.
 
 **NOTE**: We plan to extend the Multimodal Assistant API Prediction from the most dominant assistant action to allow the prediction of a series of multiple actions per turn. Please follow the [**Latest News**](https://github.com/facebookresearch/simmc/#latest-news) section in the main README of the repository for updates.
 
