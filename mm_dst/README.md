@@ -131,7 +131,7 @@ Evaluation reports are saved in the `/mm_dst/results` folder as JSON files.
 
 Please also note that the GPT2 fine-tuning is highly sensitive to the batch size (which `n_gpu` of your machine may affect), hence it may need some hyperparameter tuning to obtain the best results (and avoid over/under fitting). Please feel free to change the hyperparameter of the default settings (provided) to compare results.
 
-Below is the summary of the published models we provide:
+Below is the summary of the [published models](https://github.com/facebookresearch/simmc/releases/download/1.0/mm_dst_gpt2_baselines.tar.gz) we provide:
 
 | Baseline | Dialog Act F1 | Slot F1 |
 |--------|-------|-------|
