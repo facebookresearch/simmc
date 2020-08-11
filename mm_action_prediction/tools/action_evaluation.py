@@ -31,6 +31,9 @@ IGNORE_ATTRIBUTES = [
     "focus"  # fashion
 ]
 
+EVALUATED_FASHION_ATTRIBUTES = {"availableSizes", "price", "brand", "customerRating", "info", "color"}
+
+
 
 def evaluate_action_prediction(gt_actions, model_actions):
     """Evaluates action prediction using the raw data and model predictions.
@@ -78,6 +81,8 @@ def evaluate_action_prediction(gt_actions, model_actions):
                         assert isinstance(model_key_vals, list), (
                             "Model should also predict a list for attributes"
                         )
+                        for ii, attr in enumerate(supervision[key]):
+                            gt_key_vals[ii] = attr if attr in EVALUATED_FASHION_ATTRIBUTES else "other"
                         recall = np.mean(
                             [(ii in model_key_vals) for ii in gt_key_vals]
                         )
