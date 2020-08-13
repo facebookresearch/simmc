@@ -185,21 +185,21 @@ The baselines trained through the code obtain the following results for Sub-Task
 
 | Model  |     Action Accuracy      | Action Perplexity | Attribute Accuracy |
 |----------| :-------------: | :------: | :------: |
-| TF-IDF | 76.7 | 2.44 | 38.6 |
-| HAE    | 78.8 | 1.69 | 34.6 |        
-| HRE    | 79.4 | 1.69 | 33.2 |
-| MN     | 78.5 | 1.70 | 36.9 |        
-| T-HAE  | 77.6 | 1.80 | 38.7 |
+| TF-IDF | 77.1 | 2.59 | 57.5 |
+| HAE    | 79.7 | 1.70 | 53.6 |        
+| HRE    | 80.0 | 1.66 | 54.7 |
+| MN     | 79.2 | 1.71 | 53.3 |        
+| T-HAE  | 78.4 | 1.83 | 53.6 |
 
 **SIMMC-Fashion**
 
 | Model  |     Action Accuracy      | Action Perplexity | Attribute Accuracy |
 |----------| :-------------: | :------: | :------: |
-| TD-IDF | 77.6 | 3.61 | 48.7 |
-| HAE    | 81.5 | 1.71 | 53.7 |
-| HRE    | 81.2 | 1.78 | 53.7 |
-| MN     | 81.3 | 1.81 | 53.5 |
-| T-HAE  | 80.7 | 1.86 | 54.3 |
+| TD-IDF | 78.1 | 3.51 | 57.9 |
+| HAE    | 81.0 | 1.75 | 60.2 |
+| HRE    | 81.9 | 1.76 | 62.1 |
+| MN     | 81.6 | 1.74 | 61.6 |
+| T-HAE  | 81.4 | 1.78 | 62.1 |
 
 
 ## Rules for Sub-task #1 Submissions

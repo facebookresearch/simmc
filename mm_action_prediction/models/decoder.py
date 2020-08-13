@@ -33,7 +33,7 @@ class GenerativeDecoder(nn.Module):
                 decoder_layer = nn.TransformerDecoderLayer(
                     params["word_embed_size"],
                     params["num_heads_transformer"],
-                    params["hidden_size"],
+                    params["hidden_size_transformer"],
                 )
                 self.decoder_unit = nn.TransformerDecoder(
                     decoder_layer, params["num_layers_transformer"]

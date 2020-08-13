@@ -20,6 +20,12 @@ flags.DEFINE_string(
 )
 
 
+def normalize_sentence(sentence):
+    """Normalize the sentences and tokenize.
+    """
+    return nltk.tokenize.word_tokenize(sentence.lower())
+
+
 def evaluate_response_generation(gt_responses, model_responses):
     """Evaluates response generation using the raw data and model predictions.
     """
@@ -37,7 +43,9 @@ def evaluate_response_generation(gt_responses, model_responses):
             gt_response = gt_datum["system_transcript"]
 
             bleu_score = nltk.translate.bleu_score.sentence_bleu(
-                [gt_response], response, smoothing_function=chencherry.method1
+                [normalize_sentence(gt_response)],
+                normalize_sentence(response),
+                smoothing_function=chencherry.method1
             )
             bleu_scores.append(bleu_score)
     return np.mean(bleu_scores)

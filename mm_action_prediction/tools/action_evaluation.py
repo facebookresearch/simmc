@@ -62,7 +62,9 @@ def evaluate_action_prediction(gt_actions, model_actions):
                 continue
             # Case 1: Action mismatch -- record False for all attributes.
             if not action_match:
-                for _ in supervision.keys():
+                for key in supervision.keys():
+                    if key in IGNORE_ATTRIBUTES:
+                        continue
                     matches["attributes"].append(False)
             # Case 2: Action matches -- use model predictions for attributes.
             else:

@@ -108,7 +108,7 @@ def evaluate_agent(wizard, val_loader, args):
     print(action_metrics["confusion_matrix"])
     print_str = (
         "\nEvaluation\n\tLoss: {:.2f}\n\t"
-        "Perplexity: {:.2f}\n\tBLEU: {:.2f}\n\t"
+        "Perplexity: {:.2f}\n\tBLEU: {:.3f}\n\t"
         "Action: {:.2f}\n\t"
         "Action Perplexity: {:.2f}\n\t"
         "Action Attribute Accuracy: {:.2f}"

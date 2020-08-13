@@ -167,8 +167,8 @@ class LoaderParent:
         tf_features = np.zeros((num_utterances, self.vocab_size))
         for utt_id, utterance in enumerate(utterances):
             tokens = utterance[: utterance_lens[utt_id]]
-            tf_features[utt_id, tokens] += 1.0 / utterance_lens[utt_id]
-        # tf_idf_features = tf_features * self.IDF
+            for tt in tokens:
+                tf_features[utt_id, tt] += 1.0 / utterance_lens[utt_id]
         return tf_features.reshape(batch_size, num_rounds, -1)
 
     def get_data_related_arguments(self):
