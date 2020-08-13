@@ -212,7 +212,7 @@ class ActionExecutor(nn.Module):
                         # Predict attributes based on predicted action.
                         for key in classifier_list:
                             classifier = self.classifiers[key]
-                            model_pred = classifier(cur_state) > 0.5
+                            model_pred = classifier(cur_state) > 0
                             attr_pred = [
                                 self.attribute_vocab[key][index]
                                 for index, ii in enumerate(model_pred)

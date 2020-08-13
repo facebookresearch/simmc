@@ -15,7 +15,7 @@ VOCAB_FILE="${ROOT}${DOMAIN}_vocabulary.json"
 METADATA_EMBEDS="${ROOT}${DOMAIN}_asset_embeds.npy"
 ATTR_VOCAB_FILE="${ROOT}${DOMAIN}_attribute_vocabulary.json"
 MODEL_METAINFO="models/${DOMAIN}_model_metainfo.json"
-CHECKPOINT_PATH="checkpoints/"
+CHECKPOINT_PATH="checkpoints"
 LOG_PATH="logs/"
 
 
@@ -60,6 +60,7 @@ function tf_idf () {
 # Transformer model.
 function transformer () {
     python -u train_simmc_agent.py $COMMON_FLAGS \
+        --encoder="history_agnostic" \
         --text_encoder="transformer" \
         --num_heads_transformer=4 --num_layers_transformer=4 \
         --hidden_size_transformer=2048 --hidden_size=256\
@@ -71,7 +72,7 @@ function transformer () {
 UNIQ_LABEL="${DOMAIN}_dstc_split"
 CUR_TIME=$(date +"_%m_%d_%Y_%H_%M_%S")
 UNIQ_LABEL+=$CUR_TIME
-mkdir "${LOG_PATH}/$UNIQ_LABEL"
+mkdir "${LOG_PATH}${UNIQ_LABEL}"
 
 history_agnostic "$UNIQ_LABEL"
 hierarchical_recurrent "$UNIQ_LABEL"
