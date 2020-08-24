@@ -39,10 +39,10 @@ def evaluate_response_retrieval(gt_responses, model_scores):
 
 
 def main(_):
-    print("Reading: {}".format(FLAGS.data_json_path))
-    with open(FLAGS.data_json_file, "r") as file_id:
+    print("Reading: {}".format(FLAGS.retrieval_json_path))
+    with open(FLAGS.retrieval_json_path, "r") as file_id:
         gt_responses = json.load(file_id)
-    print("Reading: {}".format(FLAGS.model_output_path))
+    print("Reading: {}".format(FLAGS.model_score_path))
     with open(FLAGS.model_score_path, "r") as file_id:
         model_scores = json.load(file_id)
     retrieval_metrics = evaluate_response_retrieval(gt_responses, model_scores)
