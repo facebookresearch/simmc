@@ -5,6 +5,9 @@ This directory contains the code and the scripts for running the baseline models
 The Multimodal Dialog State Tracking (MM-DST) task involves systematically tracking the attributes of dialog act labels cumulative across multiple turns.
 Multimodal belief states at each turn should encode sufficient information for handling user utterances in the downstream dialog components (e.g. Dialog Policy).
 
+Please check the [task input](./TASK_INPUTS.md) file for a full description of inputs
+for each subtask.
+
 For more details on the task definition and the baseline models we provide, please refer to our SIMMC paper:
 ```
 @article{moon2020situated,
