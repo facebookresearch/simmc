@@ -4,6 +4,9 @@ This directory contains the code and the scripts for running the baseline models
 
 This subtask measures the generation (or retrieval) of the assistant response given the dialog history, multimodal context, ground truth assistant API call and the current utterance.
 
+Please check the [task input](./TASK_INPUTS.md) file for a full description of inputs
+for each subtask.
+
 ## Evaluation
 For generation, we use BLEU-4 score and for retrieval, we use recall@1, recall@5, recall@10, mean reciprocal rank (MRR), and mean rank.
 

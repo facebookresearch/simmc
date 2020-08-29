@@ -69,6 +69,9 @@ We present three sub-tasks primarily aimed at replicating human-assistant action
 | Output | Belief state for current user utterance |
 | Metrics | Intent F1, Slot F1 |
 
+Please check the [task input](./TASK_INPUTS.md) file for a full description of inputs
+for each subtask.
+
 ### Evaluation
 
 For the DSTC9 SIMMC Track, we will do a two phase evaluation as follows. 

@@ -6,6 +6,9 @@ This subtask involves predicting the assistant actions through API calls along w
 For example, enquiring about an attribute value (e.g., price) for a shared furniture item is realized through a call to the *SpecifyInfo* API with the price argument.
 A comprehensive set of APIs for our SIMMC dataset is given in the [paper][simmc_arxiv]. 
 
+Please check the [task input](./TASK_INPUTS.md) file for a full description of inputs
+for each subtask.
+
 ## Evaluation
 Currently, we evaluate action prediction as a round-wise, multiclass classification problem over the set of APIs, and measure the *accuracy* of the most **dominant action**. 
 In addition, we also use *action perplexity* (defined as the exponential of the mean loglikelihood of the dominant action) to allow situations where several actions are equally valid in a given context.
