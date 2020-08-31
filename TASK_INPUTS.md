@@ -15,10 +15,10 @@
 | `state_graph_0` | Before the round | | |  ✗ | 
 |`state_graph_1`| After the user turn | ✗ | ✗ | ✗ |
 |`state_graph_2`| After the system turn| ✗ | ✗ | ✗ |
-|`system_transcript`| | ✗ | ✗ | ✗ |
+|`system_transcript`| | ✗ | ✗<br>(prediction target) | ✗ |
 |`system_transcript_annotated`| | ✗ | ✗ | ✗ |
 |`system_turn_label`| | ✗ | ✗ | ✗ |
-|`transcript`| | | (prediction target) | |
+|`transcript`| | |  | |
 | `transcript_annotated` | | ✗ | ✗ | ✗ |
 |`turn_idx`| | | | |
 |`turn_label`| | ✗ | ✗ | ✗ |
