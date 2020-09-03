@@ -8,10 +8,7 @@ ROOT="../data/simmc_${DOMAIN}/"
 # Input files.
 TRAIN_JSON_FILE="${ROOT}${DOMAIN}_train_dials.json"
 DEV_JSON_FILE="${ROOT}${DOMAIN}_dev_dials.json"
-DEVTEST_JSON_FILE="${ROOT}${DOMAIN}_devtest_dials.json"
-METADATA_FILE="${ROOT}${DOMAIN}_metadata.csv"
 # Output files.
-VOCAB_FILE="${ROOT}${DOMAIN}_vocabulary.json"
 METADATA_EMBEDS="${ROOT}${DOMAIN}_asset_embeds.npy"
 ATTR_VOCAB_FILE="${ROOT}${DOMAIN}_attribute_vocabulary.json"
 MODEL_METAINFO="models/${DOMAIN}_model_metainfo.json"

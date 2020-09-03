@@ -11,17 +11,8 @@ TRAIN_JSON_FILE="${ROOT}${DOMAIN}_train_dials.json"
 DEV_JSON_FILE="${ROOT}${DOMAIN}_dev_dials.json"
 DEVTEST_JSON_FILE="${ROOT}${DOMAIN}_devtest_dials.json"
 
-if [ "$DOMAIN" == "furniture" ]; then
-    METADATA_FILE="${ROOT}furniture_metadata.csv"
-elif [ "$DOMAIN" == "fashion" ]; then
-    METADATA_FILE="${ROOT}fashion_metadata.json"
-else
-    echo "Invalid domain!"
-    exit 0
-fi
 
 # Output files.
-VOCAB_FILE="${ROOT}${DOMAIN}_vocabulary.json"
 METADATA_EMBEDS="${ROOT}${DOMAIN}_asset_embeds.npy"
 ATTR_VOCAB_FILE="${ROOT}${DOMAIN}_attribute_vocabulary.json"
 MODEL_METAINFO="models/${DOMAIN}_model_metainfo.json"
@@ -49,8 +40,8 @@ python -u train_simmc_agent.py $COMMON_FLAGS \
 
 
 # Evaluate a trained model checkpoint.
-# CHECKPOINT_PATH="checkpoints/hae/epoch_20.tar"
-# python -u eval_simmc_agent.py \
-#     --eval_data_path=${DEV_JSON_FILE/.json/_mm_inputs.npy} \
-#     --checkpoint="$CHECKPOINT_PATH" --gpu_id=0 --batch_size=50 \
-#     --domain="$DOMAIN"
+CHECKPOINT_PATH="checkpoints/hae/epoch_20.tar"
+python -u eval_simmc_agent.py \
+    --eval_data_path=${DEVTEST_JSON_FILE/.json/_mm_inputs.npy} \
+    --checkpoint="$CHECKPOINT_PATH" --gpu_id=0 --batch_size=50 \
+    --domain="$DOMAIN"
