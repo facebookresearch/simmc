@@ -122,11 +122,8 @@ def evaluate_frame(true_frame, pred_frame, strict=True):
     count_dict['n_pred_acts'] += 'act' in pred_frame
 
     # Compare Slots
-    true_frame_slot_values = \
-        set(f'{k}={v}' for k, v in true_frame.get('slots', []))
-
-    pred_frame_slot_values = \
-        set(f'{k}={v}' for k, v in pred_frame.get('slots', []))
+    true_frame_slot_values = {f'{k}={v}' for k, v in true_frame.get('slots', [])}
+    pred_frame_slot_values = {f'{k}={v}' for k, v in pred_frame.get('slots', [])}
 
     count_dict['n_true_slots'] += len(true_frame_slot_values)
     count_dict['n_pred_slots'] += len(pred_frame_slot_values)

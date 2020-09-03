@@ -8,7 +8,6 @@ from __future__ import absolute_import, division, print_function, unicode_litera
 import copy
 import torch
 import torch.nn as nn
-from torch.distributions import categorical
 
 import models
 from tools import rnn_support as rnn

@@ -221,8 +221,8 @@ def parse_flattened_result(to_parse):
                 }, ...  # End of a frame
             ]  # End of a dialog
     """
-    dialog_act_regex = re.compile('([\w:?.?]*)  *\[([^\]]*)\]')
-    slot_regex = re.compile('([A-Za-z0-9_.-:]*)  *= ([^,]*)')
+    dialog_act_regex = re.compile(r'([\w:?.?]*)  *\[([^\]]*)\]')
+    slot_regex = re.compile(r'([A-Za-z0-9_.-:]*)  *= ([^,]*)')
 
     belief = []
 

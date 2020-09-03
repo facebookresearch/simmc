@@ -30,7 +30,6 @@ import glob
 import json
 import logging
 import os
-import pickle
 import random
 import re
 import shutil
@@ -75,33 +74,14 @@ class TextDataset(Dataset):
 
         block_size = block_size - (tokenizer.max_len - tokenizer.max_len_single_sentence)
 
-        directory, filename = os.path.split(file_path)
-        cached_features_file = os.path.join(
-            directory, args.model_type + "_cached_lm_" + str(block_size) + "_" + filename
-        )
+        self.examples = []
+        with open(file_path, encoding="utf-8") as f:
+            text = f.read()
 
-        if os.path.exists(cached_features_file) and not args.overwrite_cache:
-            logger.info("Loading features from cached file %s", cached_features_file)
-            with open(cached_features_file, "rb") as handle:
-                self.examples = pickle.load(handle)
-        else:
-            logger.info("Creating features from dataset file at %s", directory)
+        tokenized_text = tokenizer.convert_tokens_to_ids(tokenizer.tokenize(text))
 
-            self.examples = []
-            with open(file_path, encoding="utf-8") as f:
-                text = f.read()
-
-            tokenized_text = tokenizer.convert_tokens_to_ids(tokenizer.tokenize(text))
-
-            for i in range(0, len(tokenized_text) - block_size + 1, block_size):  # Truncate in block of block_size
-                self.examples.append(tokenizer.build_inputs_with_special_tokens(tokenized_text[i : i + block_size]))
-            # Note that we are loosing the last truncated example here for the sake of simplicity (no padding)
-            # If your dataset is small, first you should loook for a bigger one :-) and second you
-            # can change this behavior by adding (model specific) padding.
-
-            logger.info("Saving features into cached file %s", cached_features_file)
-            with open(cached_features_file, "wb") as handle:
-                pickle.dump(self.examples, handle, protocol=pickle.HIGHEST_PROTOCOL)
+        for i in range(0, len(tokenized_text) - block_size + 1, block_size):  # Truncate in block of block_size
+            self.examples.append(tokenizer.build_inputs_with_special_tokens(tokenized_text[i : i + block_size]))
 
     def __len__(self):
         return len(self.examples)
@@ -800,9 +780,10 @@ def main():
     if args.do_eval and args.local_rank in [-1, 0]:
         checkpoints = [args.output_dir]
         if args.eval_all_checkpoints:
-            checkpoints = list(
-                os.path.dirname(c) for c in sorted(glob.glob(args.output_dir + "/**/" + WEIGHTS_NAME, recursive=True))
-            )
+            checkpoints = [
+                os.path.dirname(c)
+                for c in sorted(glob.glob(args.output_dir + "/**/" + WEIGHTS_NAME, recursive=True))
+            ]
             logging.getLogger("transformers.modeling_utils").setLevel(logging.WARN)  # Reduce logging
         logger.info("Evaluate the following checkpoints: %s", checkpoints)
         for checkpoint in checkpoints:
@@ -812,7 +793,7 @@ def main():
             model = AutoModelWithLMHead.from_pretrained(checkpoint)
             model.to(args.device)
             result = evaluate(args, model, tokenizer, prefix=prefix)
-            result = dict((k + "_{}".format(global_step), v) for k, v in result.items())
+            result = {k + "_{}".format(global_step): v for k, v in result.items()}
             results.update(result)
 
     return results

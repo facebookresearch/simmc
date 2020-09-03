@@ -108,7 +108,6 @@ class DataloaderSIMMC(loaders.LoaderParent):
         else:
             raise ValueError("Domain must be either furniture/fashion!")
 
-
         # Additional data constructs (post-processing).
         if params["encoder"] == "memory_network":
             self._construct_fact()
