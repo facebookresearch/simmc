@@ -53,10 +53,10 @@ def evaluate_response_generation(gt_responses, model_responses):
 
 def main(_):
     print("Reading: {}".format(FLAGS.data_json_path))
-    with open(FLAGS.data_json_file, "r") as file_id:
+    with open(FLAGS.data_json_path, "r") as file_id:
         gt_responses = json.load(file_id)
-    print("Reading: {}".format(FLAGS.model_output_path))
-    with open(FLAGS.model_output_path, "r") as file_id:
+    print("Reading: {}".format(FLAGS.model_response_path))
+    with open(FLAGS.model_response_path, "r") as file_id:
         model_responses = json.load(file_id)
     bleu_score = evaluate_response_generation(gt_responses, model_responses)
     print(bleu_score)
