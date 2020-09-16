@@ -1,6 +1,5 @@
-type Repository$options = {
-    "__comment": "Configuration for browser extension that does small UI changes, like removing the 'merge pull request' button, and adding buttons for 'import to phabricator' or 'land to fbsource' - currently FB-Only, though we hope to change that",
-    allowDirectMerges: false,
-    "allowBotCommands": false,
-    "internalRepository": "fbsource"
-};
+{
+  "allowDirectMerges": false,
+  "allowBotCommands": false,
+  "internalRepository": "fbsource"
+}
