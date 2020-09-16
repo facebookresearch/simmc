@@ -1,4 +1,61 @@
 #!/usr/bin/env python3
+"""
+    Util functions for evaluating the DST model predictions.
+    The script includes a main function which takes
+    the original JSON data file and the predicted model output file
+    (in the same format), and outputs the report.
+"""
+import argparse
+import json
+
+def evaluate_from_json(d_true, d_pred):
+    """
+        <list>d_true and <list>d_pred are in the following format:
+        (Equivalent to "dialogue_data" field in the input data JSON file)
+        [
+            {
+                "dialogue": [
+                    {
+                        "belief_state": [
+                            [
+                                {
+                                    'act': <str>,
+                                    'slots': [
+                                        [
+                                            SLOT_NAME, SLOT_VALUE
+                                        ], ...
+                                    ]
+                                },
+                                [End of a frame]
+                                ...
+                            ],
+                        ]
+                    }
+                    [End of a turn]
+                    ...                    
+                ],
+            }
+            [End of a dialogue]            
+            ...
+        ]
+    """
+    d_true_flattened = []
+    d_pred_flattened = []
+
+    for i in range(len(d_true)):
+        # Iterate through each dialog
+        dialog_true = d_true[i]['dialogue']
+        dialog_pred = d_pred[i]['dialogue']
+
+        for j in range(len(dialog_true)):
+            # Iterate through each turn
+            turn_true = dialog_true[j]['belief_state']
+            turn_pred = dialog_pred[j]['belief_state']
+
+            d_true_flattened.append(turn_true)
+            d_pred_flattened.append(turn_pred)
+
+    return evaluate_from_flat_list(d_true_flattened, d_pred_flattened)
 
 
 def evaluate_from_flat_list(d_true, d_pred):
@@ -142,3 +199,32 @@ def evaluate_frame(true_frame, pred_frame, strict=True):
 
 def add_dicts(d1, d2):
     return {k: d1[k] + d2[k] for k in d1}
+
+
+if __name__ == '__main__':
+    # Parse input args
+    parser = argparse.ArgumentParser()
+    parser.add_argument('--input_path_target',
+                        help='path for target (.json)')
+    parser.add_argument('--input_path_predicted',
+                        help='path for model prediction output (.json)')
+    parser.add_argument('--output_path_report',
+                        help='path for saving evaluation summary (.json)')
+
+    args = parser.parse_args()
+    input_path_target = args.input_path_target
+    input_path_predicted = args.input_path_predicted
+    output_path_report = args.output_path_report
+
+    # Read the JSON file input
+    # json_predicted must have the same structure as the original input JSON
+    # e.g. {'dialogue_data': [ ... ]}
+    json_target = json.load(open(input_path_target, 'r'))
+    json_predicted = json.load(open(input_path_predicted, 'r'))
+
+    # Evaluate
+    report = evaluate_from_json(json_target['dialogue_data'], json_predicted['dialogue_data'])
+
+    # Save report
+    with open(output_path_report, 'w') as f_out:
+        json.dump(report, f_out)

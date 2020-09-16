@@ -130,9 +130,52 @@ python -m gpt2_dst.scripts.evaluate \
 
 Evaluation reports are saved in the `/mm_dst/results` folder as JSON files.
 
-*Important*: For any of the models you build, please make sure that you use the function `simmc.mm_dst.utils.evaluate_dst.evaluate_from_flat_list` to obtain the evaluation reports.
+Please note that the GPT2 fine-tuning is highly sensitive to the batch size (which `n_gpu` of your machine may affect), hence it may need some hyperparameter tuning to obtain the best results (and avoid over/under fitting). Please feel free to change the hyperparameter of the default settings (provided) to compare results.
 
-Please also note that the GPT2 fine-tuning is highly sensitive to the batch size (which `n_gpu` of your machine may affect), hence it may need some hyperparameter tuning to obtain the best results (and avoid over/under fitting). Please feel free to change the hyperparameter of the default settings (provided) to compare results.
+Alternatively, we *also* provide an evaluation script that takes as input a JSON file that is in the same structure as the original data JSON files (in case your model outputs predictions per dialog, as opposed to per turn). For example, the input `pred_dials.json` file should be formatted:
+```
+{
+    "dialogue_data": [
+        {
+            "dialogue": [
+                {
+                    "belief_state": [
+                        [
+                            {
+                                'act': <str>,
+                                'slots': [
+                                    [
+                                        SLOT_NAME, SLOT_VALUE
+                                    ], ...
+                                ]
+                            },
+                            [End of a frame]
+                            ...
+                        ],
+                    ]
+                }
+                [End of a turn]
+                ...                    
+            ],
+        },
+        [End of a dialogue]
+        ...
+    ]
+}
+```
+
+To run this evaluation script:
+```
+$ ./run_evaluate.sh
+```
+
+The shell script above repeats the following for both {furniture|fashion} domains.
+```
+python -m utils.evaluate_dst \
+    --input_path_target="${PATH_DATA_DIR}"/simmc_fashion/fashion_devtest_dials.json \
+    --input_path_predicted="${PATH_DIR}"/fashion_devtest_pred_dials.json \
+    --output_path_report="${PATH_DIR}"/fashion_report.json
+```
 
 Below is the summary of the [published models](https://github.com/facebookresearch/simmc/releases/download/1.0/mm_dst_gpt2_baselines.tar.gz) we provide:
 
