@@ -30,7 +30,7 @@ Sub-Task #1, Sub-Task #2 released.
 * [Data Formats](data/README.md)
 * **Baseline Details**: [MM Action Prediction](mm_action_prediction/README.md), [MM Response Generation](mm_response_generation/README.md), [MM-DST](mm_dst/README.md)
 * [Challenge Instructions](#challenge-instructions)
-* [Submission Instructions](#submission-instructions-&-timeline)
+* [Submission Instructions](#submission-instructions-and-timeline)
 
 
 ## Timeline
@@ -111,7 +111,7 @@ $ git clone https://github.com/facebookresearch/simmc.git
 * Submit your model prediction results on the `test-std` set at simmc@fb.com (more instructions to follow later). 
 * We will evaluate the participants’ model predictions using the same evaluation script for Phase 1, and announce the results.
 
-## Submission Instructions & Timeline
+## Submission Instructions and Timeline
 
 <table>
   <tbody>
