@@ -30,6 +30,7 @@ Sub-Task #1, Sub-Task #2 released.
 * [Data Formats](data/README.md)
 * **Baseline Details**: [MM Action Prediction](mm_action_prediction/README.md), [MM Response Generation](mm_response_generation/README.md), [MM-DST](mm_dst/README.md)
 * [Challenge Instructions](#challenge-instructions)
+* [Submission Instructions](#submission-instructions-&-timeline)
 
 
 ## Timeline
@@ -109,6 +110,73 @@ $ git clone https://github.com/facebookresearch/simmc.git
 ### (4) Reporting Results for Challenge Phase 2
 * Submit your model prediction results on the `test-std` set at simmc@fb.com (more instructions to follow later). 
 * We will evaluate the participants’ model predictions using the same evaluation script for Phase 1, and announce the results.
+
+## Submission Instructions & Timeline
+
+<table>
+  <tbody>
+    <tr>
+      <td rowspan=4><ins>Before</ins> Sept 28th 2020</td>
+      <td rowspan=4>Each Team</td>
+      <td>Each participating team should create a repository, e.g. in github, that can be made public under a permissive open source license (MIT License preferred). Repository doesn’t need to be publicly viewable yet.</td>
+    </tr>
+    <tr>
+      <td>Ahead of test data release tag a repository commit that contains both runable code and model parameter files that are the team’s entries for all sub-tasks attempted.</td>
+    </tr>
+    <tr>
+      <td>Tag commit with “dstc9-simmc-entry”.</td>
+    </tr>
+    <tr>
+      <td>Models (model parameter files) and code should have associated date-time stamps which are before Sept 27 23:59:59 anywhere on Earth.</td>
+    </tr>
+    <tr>
+      <td>Sept 28th 2020</td>
+      <td>SIMMC Organizers</td>
+      <td>Test-Std data released (during US Pacific coast working hours).</td>
+    </tr>
+    <tr>
+      <td rowspan=5><ins>Before</ins> Oct 5th 2020</td>
+      <td rowspan=5>Each Team</td>
+      <td>Generate test data predictions using the code & model versions tagged previously with &quot;dstc9-simmc-entry&quot;.</td>
+    </tr>
+    <tr>
+      <td>For each sub-task that the team attempted, create a PR and check-in to the team’s repository.</td>
+    </tr>
+    <tr>
+      <td> The PR/check-in should contain an output directory with the model output in JSON format that can be scored with the automatic scripts provided for that sub-task.</td>
+    </tr>
+    <tr>
+      <td>In the PR comments paste the results of running the automatic test scripts.</td>
+    </tr>
+    <tr>
+      <td>Tag the commit with &quot;dstc9-simmc-test-subtask-&lt;N&gt;&quot;, where &lt;N&gt; is the sub-task number.</td>
+        </tr>
+    <tr>    
+      <td rowspan=2>By Oct 5th 2020</td>
+      <td rowspan=2>Each Team</td>
+      <td>Make the team repository public under a permissive Open Source license (MIT license is prefered).</td>
+    </tr>
+    <tr>
+      <td>Email the SIMMC Organizers a link to the repository at simmc@fb.com</td>
+    </tr>
+    <tr>
+      <td>Oct 5th - Oct 12th 2020</td>
+      <td>SIMMC Organizers</td>
+      <td>SIMMC organizers to validate sub-task results.</td>
+    </tr>
+    <tr>
+      <td>Oct 12th 2020</td>
+      <td>SIMMC Organizers</td>
+      <td>Publish anonymized team rankings on the SIMMC track github and email each team their anonymized team identity.</td>
+    </tr>
+    <tr>
+      <td>Post Oct 12th 2020</td>
+      <td>SIMMC Organizers</td>
+      <td>Our plan is to write up a challenge summary paper. In this we may conduct error analysis of the results and may look to extend, e.g. possibly with human scoring, the submitted results.</td>
+    </tr>
+  </tbody>
+</table>
+
 
 
 ## Contact
