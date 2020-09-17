@@ -118,10 +118,10 @@ $ git clone https://github.com/facebookresearch/simmc.git
     <tr>
       <td rowspan=4><ins>Before</ins> Sept 28th 2020</td>
       <td rowspan=4>Each Team</td>
-      <td>Each participating team should create a repository, e.g. in github, that can be made public under a permissive open source license (MIT License preferred). Repository doesn’t need to be publicly viewable yet.</td>
+      <td>Each participating team should create a repository, e.g. in github.com, that can be made public under a permissive open source license (MIT License preferred). Repository doesn’t need to be publicly viewable at that time.</td>
     </tr>
     <tr>
-      <td>Ahead of test data release tag a repository commit that contains both runable code and model parameter files that are the team’s entries for all sub-tasks attempted.</td>
+      <td>Before Sept 28th tag a repository commit that contains both runable code and model parameter files that are the team’s entries for all sub-tasks attempted.</td>
     </tr>
     <tr>
       <td>Tag commit with “dstc9-simmc-entry”.</td>
@@ -135,22 +135,19 @@ $ git clone https://github.com/facebookresearch/simmc.git
       <td>Test-Std data released (during US Pacific coast working hours).</td>
     </tr>
     <tr>
-      <td rowspan=5><ins>Before</ins> Oct 5th 2020</td>
-      <td rowspan=5>Each Team</td>
+      <td rowspan=2><ins>Before</ins> Oct 5th 2020</td>
+      <td rowspan=2>Each Team</td>
       <td>Generate test data predictions using the code & model versions tagged previously with &quot;dstc9-simmc-entry&quot;.</td>
     </tr>
     <tr>
-      <td>For each sub-task that the team attempted, create a PR and check-in to the team’s repository.</td>
+      <td>For each sub-task attempted, create a PR and check-in to the team’s repository where:
+        <ul>
+          <li>The PR/check-in contains an output directory with the model output in JSON format that can be scored with the automatic scripts provided for that sub-task.</li>
+          <li>The PR comments contain a copy-paste of the results of running the automatic test script for that sub-task.</li>
+          <li>Tag the commit with &quot;dstc9-simmc-test-subtask-&lt;N&gt;&quot;, where &lt;N&gt; is the sub-task number.</li>
+        </ul>
+      </td>
     </tr>
-    <tr>
-      <td> The PR/check-in should contain an output directory with the model output in JSON format that can be scored with the automatic scripts provided for that sub-task.</td>
-    </tr>
-    <tr>
-      <td>In the PR comments paste the results of running the automatic test scripts.</td>
-    </tr>
-    <tr>
-      <td>Tag the commit with &quot;dstc9-simmc-test-subtask-&lt;N&gt;&quot;, where &lt;N&gt; is the sub-task number.</td>
-        </tr>
     <tr>    
       <td rowspan=2>By Oct 5th 2020</td>
       <td rowspan=2>Each Team</td>
