@@ -143,7 +143,7 @@ $ git clone https://github.com/facebookresearch/simmc.git
       <td>For each sub-task attempted, create a PR and check-in to the team’s repository where:
         <ul>
           <li>The PR/check-in contains an output directory with the model output in JSON format that can be scored with the automatic scripts provided for that sub-task.</li>
-          <li>The PR comments contain a copy-paste of the results of running the automatic test script for that sub-task.</li>
+          <li>The PR comments contain a short technical summary of model and a copy-paste of the results of running the automatic test script for that sub-task.</li>
           <li>Tag the commit with &quot;dstc9-simmc-test-subtask-&lt;N&gt;&quot;, where &lt;N&gt; is the sub-task number.</li>
         </ul>
       </td>
