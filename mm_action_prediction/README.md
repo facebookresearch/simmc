@@ -57,7 +57,8 @@ The model outputs are expected in the following format:
 				"attributes": {
 					<attribute_label>: <attribute_val>,
 					...
-				}
+				},
+                "turn_id": ..
 			}
 		]
 	}

@@ -135,7 +135,8 @@ class ActionExecutor(nn.Module):
                                 action_token: action_logits[ii, jj, kk].item()
                                 for kk, action_token in enumerate(action_list)
                             },
-                            "attributes": {}
+                            "attributes": {},
+                            "turn_id": jj
                         }
                         for jj in range(batch["dialog_len"][ii])
                     ]
