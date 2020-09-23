@@ -488,7 +488,10 @@ class DataloaderSIMMC(loaders.LoaderParent):
             {
                 "dialog_id": batch["dialog_id"][ii].item(),
                 "predictions": [
-                    {"response": stringify(beam_outputs[ii][jj])}
+                    {
+                        "response": stringify(beam_outputs[ii][jj]),
+                        "turn_id": jj
+                    }
                     for jj in range(batch["dialog_len"][ii])
                 ]
             }

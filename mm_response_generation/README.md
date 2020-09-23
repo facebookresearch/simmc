@@ -22,6 +22,7 @@ The model outputs are expected in the following format:
 		"dialog_id": batch["dialog_id"][ii].item(),
 		"predictions": [
 			{
+                "turn_id": ..
 				"response": ...
 			}
 			...
@@ -38,8 +39,10 @@ The model outputs are expected in the following format:
 	{
 		"dialog_id": <dialog_id>,
 		"candidate_scores": [
-			<list of 100 scores for 100 candidates for round 1>
-			<list of 100 scores for 100 candidates for round 2>
+            {
+                "scores": <list of 100 scores for 100 candidates for round 1>
+                "turn_id": ..
+            },
 			...
 		]
 	}

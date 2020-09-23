@@ -83,7 +83,12 @@ class Assistant(nn.Module):
                 {
                     "dialog_id": batch["dialog_id"][ii].item(),
                     "candidate_scores": [
-                        list(option_scores[ii, jj].cpu().numpy())
+                        {
+                            "scores": [
+                                float(kk) for kk in option_scores[ii, jj].cpu()
+                            ],
+                            "turn_id": jj
+                        }
                         for jj in range(batch["dialog_len"][ii])
                     ]
                 }
