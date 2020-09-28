@@ -9,7 +9,7 @@
 |**JSON File (Turn Level Input Fields)**| | | |
 | `belief_state` | ✗ | ✗ | ✗ <br> (prediction target) |
 |  `domain` | 
-| `state_graph_0` |  | |  ✗ | 
+|`state_graph_0`|  ✗ | ✗ | ✗ | 
 |`state_graph_1`|  ✗ | ✗ | ✗ |
 |`state_graph_2`|  ✗ | ✗ | ✗ |
 |`system_transcript`<br>(current turn) | ✗ | ✗<br>(prediction target) | ✗ |

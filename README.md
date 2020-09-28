@@ -30,7 +30,7 @@ Sub-Task #1, Sub-Task #2 released.
 * [Data Formats](data/README.md)
 * **Baseline Details**: [MM Action Prediction](mm_action_prediction/README.md), [MM Response Generation](mm_response_generation/README.md), [MM-DST](mm_dst/README.md)
 * [Challenge Instructions](#challenge-instructions)
-* [Submission Instructions](#submission-instructions-and-timeline)
+* [Submission Instructions](SUBMISSION_INSTRUCTIONS.md)
 
 
 ## Timeline
@@ -54,21 +54,21 @@ We present three sub-tasks primarily aimed at replicating human-assistant action
 | Goal | To predict the correct Assistant API action(s) (classification) |
 | Input | Current user utterance, Dialog context, Multimodal context |
 | Output |  Structural API (action & arguments) |
-| Metrics |  Perplexity, Mean Average Precision |
+| Metrics |  Action Accuracy, Attribute Accuracy, Action Perplexity |
 
 | Sub-Task #2 | [Multimodal Dialog Response Generation & Retrieval](mm_response_generation)  |
 |---------|---------------------------------------------------------------------------------------------------------------------------------------|
 | Goal | To generate Assistant responses or retrieve from a candidate pool  |
 | Input | Current user utterance, Dialog context, Multimodal context, (Ground-truth API Calls) |
 | Output | Assistant response utterance |
-| Metrics | Generation: BLEU-4, Retrieval: Accuracy@k, Entropy |
+| Metrics | Generation: BLEU-4, Retrieval: MRR, R@1, R@5, R@10, Mean Rank |
 
 | Sub-Task #3 | [Multimodal Dialog State Tracking (MM-DST)](mm_dst) |
 |---------|---------------------------------------------------------------------------------------------------------------------------------------|
 | Goal | To track user belief states across multiple turns |
 | Input | Current user utterance, Dialogue context, Multimodal context |
 | Output | Belief state for current user utterance |
-| Metrics | Intent F1, Slot F1 |
+| Metrics | Slot F1, Intent F1 |
 
 Please check the [task input](./TASK_INPUTS.md) file for a full description of inputs
 for each subtask.
@@ -104,76 +104,12 @@ $ git clone https://github.com/facebookresearch/simmc.git
 ```
 
 ### (3) Reporting Results for Challenge Phase 1
-* Submit your model prediction results on the `devtest` set at simmc@fb.com (more instructions to follow later). 
-* We will then send you the `test-std` set (with ground-truth labels hidden) on Sept 28.
+* Submit your model prediction results on the `devtest` set, following the [submission instructions](./SUBMISSION_INSTRUCTIONS.md). 
+* We will release the `test-std` set (with ground-truth labels hidden) on Sept 28.
 
 ### (4) Reporting Results for Challenge Phase 2
-* Submit your model prediction results on the `test-std` set at simmc@fb.com (more instructions to follow later). 
+* Submit your model prediction results on the `test-std` set, following the [submission instructions](./SUBMISSION_INSTRUCTIONS.md). 
 * We will evaluate the participants’ model predictions using the same evaluation script for Phase 1, and announce the results.
-
-## Submission Instructions and Timeline
-
-<table>
-  <tbody>
-    <tr>
-      <td rowspan=4><ins>Before</ins> Sept 28th 2020</td>
-      <td rowspan=4>Each Team</td>
-      <td>Each participating team should create a repository, e.g. in github.com, that can be made public under a permissive open source license (MIT License preferred). Repository doesn’t need to be publicly viewable at that time.</td>
-    </tr>
-    <tr>
-      <td>Before Sept 28th tag a repository commit that contains both runable code and model parameter files that are the team’s entries for all sub-tasks attempted.</td>
-    </tr>
-    <tr>
-      <td>Tag commit with “dstc9-simmc-entry”.</td>
-    </tr>
-    <tr>
-      <td>Models (model parameter files) and code should have associated date-time stamps which are before Sept 27 23:59:59 anywhere on Earth.</td>
-    </tr>
-    <tr>
-      <td>Sept 28th 2020</td>
-      <td>SIMMC Organizers</td>
-      <td>Test-Std data released (during US Pacific coast working hours).</td>
-    </tr>
-    <tr>
-      <td rowspan=2><ins>Before</ins> Oct 5th 2020</td>
-      <td rowspan=2>Each Team</td>
-      <td>Generate test data predictions using the code & model versions tagged previously with &quot;dstc9-simmc-entry&quot;.</td>
-    </tr>
-    <tr>
-      <td>For each sub-task attempted, create a PR and check-in to the team’s repository where:
-        <ul>
-          <li>The PR/check-in contains an output directory with the model output in JSON format that can be scored with the automatic scripts provided for that sub-task.</li>
-          <li>The PR comments contain a short technical summary of model and a copy-paste of the results of running the automatic test script for that sub-task.</li>
-          <li>Tag the commit with &quot;dstc9-simmc-test-subtask-&lt;N&gt;&quot;, where &lt;N&gt; is the sub-task number.</li>
-        </ul>
-      </td>
-    </tr>
-    <tr>    
-      <td rowspan=2>By Oct 5th 2020</td>
-      <td rowspan=2>Each Team</td>
-      <td>Make the team repository public under a permissive Open Source license (MIT license is prefered).</td>
-    </tr>
-    <tr>
-      <td>Email the SIMMC Organizers a link to the repository at simmc@fb.com</td>
-    </tr>
-    <tr>
-      <td>Oct 5th - Oct 12th 2020</td>
-      <td>SIMMC Organizers</td>
-      <td>SIMMC organizers to validate sub-task results.</td>
-    </tr>
-    <tr>
-      <td>Oct 12th 2020</td>
-      <td>SIMMC Organizers</td>
-      <td>Publish anonymized team rankings on the SIMMC track github and email each team their anonymized team identity.</td>
-    </tr>
-    <tr>
-      <td>Post Oct 12th 2020</td>
-      <td>SIMMC Organizers</td>
-      <td>Our plan is to write up a challenge summary paper. In this we may conduct error analysis of the results and may look to extend, e.g. possibly with human scoring, the submitted results.</td>
-    </tr>
-  </tbody>
-</table>
-
 
 
 ## Contact
