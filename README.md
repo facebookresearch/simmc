@@ -19,6 +19,7 @@ Our challenge focuses on our SIMMC datasets, both of which are shopping domains:
 
 ### Latest News
 
+* **[Sept 28, 2020]** Test-Std data released, End of Challenge Phase 1.
 * **[June 22, 2020]** Challenge announcement. Training / development datasets are released.
 * **[July 8, 2020]** Evaluation scripts and code to train baselines for 
 Sub-Task #1, Sub-Task #2 released.
