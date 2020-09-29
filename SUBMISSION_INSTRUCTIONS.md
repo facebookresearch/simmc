@@ -14,9 +14,9 @@ For subtasks 1 and 2 there are 1.2K predictions (1 per dialogue). For subtask 3 
 
 We provide:
 
-* **`devtest`, in the `test-std` format**: to give participants an early heads-up on how the `test-std` dataset will look like, we re-formatted the already-released `devtest` set in the format of the soon-to-be-released `test-std` file. Please ensure that your script and model can run on [fashion_devtest_dials_teststd_format_public.json](./data/simmc_fashion/fashion_devtest_dials_teststd_format_public.json) and [furniture_devtest_dials_teststd_format_public.json](./data/simmc_furniture/furniture_devtest_dials_teststd_format_public.json).
+* **`devtest`, in the `test-std` format**: to give participants an early heads-up on how the `test-std` dataset will look like, we re-formatted the already-released `devtest` set in the format of the `test-std` file. Please ensure that your script and model are compatible and can run on [fashion_devtest_dials_teststd_format_public.json](./data/simmc_fashion/fashion_devtest_dials_teststd_format_public.json) and [furniture_devtest_dials_teststd_format_public.json](./data/simmc_furniture/furniture_devtest_dials_teststd_format_public.json). Please note that the Evaluation Phase 1 is on the entire `devtest` set.
 
-* **`test-std`**: <Download link will be available on Sept 28>.
+* **`test-std`**: In the [main data folder](./data), we release the `test-std` dataset for Evalaution Phase 2: Please check out `./data/simmc_{domain}/{domain}_teststd_dials{_|_api_calls_|_retrieval_candidates_}public.json`, and report the prediction results on those following the instructions below.
 
 
 ## Evaluation Criteria
