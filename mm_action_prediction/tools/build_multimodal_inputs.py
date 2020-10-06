@@ -187,6 +187,11 @@ def build_multimodal_inputs(input_json_file):
                 encoded_round_candidates = []
                 for cand_ind in round_candidates:
                     cand_str = candidate_pool[cand_ind].lower().strip(" ")
+                    # If candidate is not in the dict, add it.
+                    if cand_str not in utterance_dict["assistant"]:
+                        utterance_dict["assistant"][cand_str] = (
+                            len(utterance_dict["assistant"])
+                        )
                     pool_ind = utterance_dict["assistant"][cand_str]
                     encoded_round_candidates.append(pool_ind)
                 encoded_candidates[datum_id, round_id] = encoded_round_candidates
