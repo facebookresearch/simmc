@@ -19,14 +19,15 @@ def normalize_sentence(sentence):
 
 
 def evaluate_response_generation(
-    gt_responses, model_responses, single_round_eval=False
+    gt_responses, model_responses, single_round_eval=False, compute_std_err=False
 ):
     """Evaluates response generation using the raw data and model predictions.
 
     Args:
         gt_responses: Ground truth responses.
         model_responses: Generated responses.
-        single_round_eval: Evaluate only for the last turn.
+        single_round_eval: Evaluate only for the last turn
+        compute_std_err: Computes standard error for the metrics
     """
     gt_responses_pool = {ii["dialogue_idx"]: ii for ii in gt_responses["dialogue_data"]}
     bleu_scores = []
@@ -53,7 +54,12 @@ def evaluate_response_generation(
             )
             bleu_scores.append(bleu_score)
     print("#Instances evaluated BLEU: {}".format(len(bleu_scores)))
-    return np.mean(bleu_scores)
+
+    bleu_std_err = np.std(bleu_scores) / np.sqrt(len(bleu_scores))
+    if compute_std_err:
+        return np.mean(bleu_scores), bleu_std_err
+    else:
+        return np.mean(bleu_scores)
 
 
 def main(args):
@@ -64,9 +70,18 @@ def main(args):
     with open(args["model_response_path"], "r") as file_id:
         model_responses = json.load(file_id)
     bleu_score = evaluate_response_generation(
-        gt_responses, model_responses, args["single_round_evaluation"]
+        gt_responses,
+        model_responses,
+        args["single_round_evaluation"],
+        args["compute_std_err"],
     )
-    print("BLEU Score: {:.4f}".format(bleu_score))
+
+    if args["compute_std_err"]:
+        bleu_std_err = bleu_score[1]
+        bleu_score = bleu_score[0]
+    else:
+        bleu_std_err = 0.0
+    print("BLEU Score: {:.4f} +- {:.4f}".format(bleu_score, bleu_std_err))
 
 
 if __name__ == "__main__":
@@ -85,6 +100,13 @@ if __name__ == "__main__":
         action="store_true",
         default=False,
         help="Single round evaluation for hidden split",
+    )
+    parser.add_argument(
+        "--compute_std_err",
+        dest="compute_std_err",
+        action="store_true",
+        default=False,
+        help="Computes standard error for the metrics",
     )
     try:
         parsed_args = vars(parser.parse_args())

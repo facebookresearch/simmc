@@ -10,13 +10,16 @@ import json
 import numpy as np
 
 
-def evaluate_response_retrieval(gt_responses, model_scores, single_round_eval=False):
+def evaluate_response_retrieval(
+    gt_responses, model_scores, single_round_eval=False, compute_std_err=False
+):
     """Evaluates response retrieval using the raw data and model predictions.
 
     Args:
         gt_responses: Ground truth responses.
-        model_scores: Scores assigned by the model to the candidates.
-        single_round_eval: Evaluate only for the last turn.
+        model_scores: Scores assigned by the model to the candidates
+        single_round_eval: Evaluate only for the last turn
+        compute_std_err: Computes standard error for the metrics
 
     If in single round evaluation model (mostly for hidden test-std split),
     use hidden gt_index field. Else, 0th element is the ground truth for other
@@ -44,13 +47,25 @@ def evaluate_response_retrieval(gt_responses, model_scores, single_round_eval=Fa
     gt_ranks = np.array(gt_ranks)
     print("#Instances evaluated retrieval: {}".format(gt_ranks.size))
 
-    return {
+    num_instances = gt_ranks.size
+    metrics = {
         "r1": np.mean(gt_ranks <= 1),
         "r5": np.mean(gt_ranks <= 5),
         "r10": np.mean(gt_ranks <= 10),
         "mean": np.mean(gt_ranks),
         "mrr": np.mean(1 / gt_ranks),
     }
+    if compute_std_err:
+        metrics_std_err = {
+            "r1": np.std(gt_ranks <= 1) / np.sqrt(num_instances),
+            "r5": np.std(gt_ranks <= 5) / np.sqrt(num_instances),
+            "r10": np.std(gt_ranks <= 10) / np.sqrt(num_instances),
+            "mean": np.std(gt_ranks) / np.sqrt(num_instances),
+            "mrr": np.std(1 / gt_ranks) / np.sqrt(num_instances),
+        }
+        return metrics, metrics_std_err
+    else:
+        return metrics
 
 
 def main(args):
@@ -61,8 +76,16 @@ def main(args):
     with open(args["model_score_path"], "r") as file_id:
         model_scores = json.load(file_id)
     retrieval_metrics = evaluate_response_retrieval(
-        gt_responses, model_scores, args["single_round_evaluation"]
+        gt_responses,
+        model_scores,
+        args["single_round_evaluation"],
+        args["compute_std_err"],
     )
+    if args["compute_std_err"]:
+        retrieval_std_err = retrieval_metrics[1]
+        retrieval_metrics = retrieval_metrics[0]
+        print("\nStandard error:")
+        print(retrieval_std_err)
     print(retrieval_metrics)
 
 
@@ -84,6 +107,13 @@ if __name__ == "__main__":
         action="store_true",
         default=False,
         help="Single round evaluation for hidden split",
+    )
+    parser.add_argument(
+        "--compute_std_err",
+        dest="compute_std_err",
+        action="store_true",
+        default=False,
+        help="Computes standard error for the metrics",
     )
     try:
         parsed_args = vars(parser.parse_args())
