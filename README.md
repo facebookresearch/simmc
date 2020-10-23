@@ -41,7 +41,7 @@ Sub-Task #1, Sub-Task #2 released.
 | June 22, 2020 | Training & development data released |
 | Sept 28, 2020  | Test-Std data released, End of Challenge Phase 1 |
 | Oct 5, 2020 | Entry submission deadline, End of Challenge Phase 2 |
-| Oct 12, 2020  | Final results announced |
+| Oct 12, 2020  | [Final results announced](DSTC9_SIMMC_RESULTS.md) |
 
 
 ## Track Description
