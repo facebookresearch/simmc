@@ -18,7 +18,7 @@ Congratulations to the winners and runners-up, and a big thanks to all the parti
 
 ### Details
 We launched the SIMMC challenge in June, 2020. Please checkout the 
-[main page](#1), [paper](#2), and the [Facebook AI blog](#2) for more details. 
+[main page][1], [paper][2], and the [Facebook AI blog][3] for more details. 
 
 Please checkout the challenge page, paper, and the Facebook AI blog for further details about the challenge, dataset, tasks, and the evaluation metrics.
  
@@ -32,16 +32,16 @@ Please checkout the challenge page, paper, and the Facebook AI blog for further 
 
 | Team | Affiliation                                       | Github |
 |:----:|-----------------------------------------------------|:----:|
-|  1   | National Taiwan University, Taiwan                  | [Link](4) |
-|  2   | Sogang University, South Korea                      | [Link](5) |
-|  3   | Sogang University, South Korea                      | [Link](6) |
-|  4   | Institute for Infocomm Research, A-STAR, Singapore  | [Link](7) |
-|  5   | LINKS Foundation and Politecnico di Torino, Italy   | [Link](8) |
+|  1   | National Taiwan University, Taiwan                  | [Link][4] |
+|  2   | Sogang University, South Korea                      | [Link][5] |
+|  3   | Sogang University, South Korea                      | [Link][6] |
+|  4   | Institute for Infocomm Research, A-STAR, Singapore  | [Link][7] |
+|  5   | LINKS Foundation and Politecnico di Torino, Italy   | [Link][8] |
 
 
 **Detailed Results** 
 
-All the detailed results are [here](#9).
+All the detailed results are [here][9].
 
 
 [1]: https://github.com/facebookresearch/simmc
