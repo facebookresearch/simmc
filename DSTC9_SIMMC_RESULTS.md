@@ -25,7 +25,7 @@ Please checkout the challenge page, paper, and the Facebook AI blog for further 
 **Results Summary**
 
 <figure>
-<img src="./figures/simmc_dstc9_results_summary.png" alt="DSTC9 SIMMC Results Summary" width=400px align="center">
+<img src="./figures/simmc_dstc9_results_summary.png" alt="DSTC9 SIMMC Results Summary" width=600px align="center">
 <figcaption><i>Summary on Test-Std split, average of Furniture and Fashion.</i></figcaption>
 </figure>
 
