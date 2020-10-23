@@ -25,7 +25,7 @@ Please checkout the challenge page, paper, and the Facebook AI blog for further 
 **Results Summary**
 
 <figure>
-<img src="./figures/simmc_dstc9_results_summary.png" alt="DSTC9 SIMMC Results Summary" align="center">
+<img src="./figures/simmc_dstc9_results_summary.png" alt="DSTC9 SIMMC Results Summary" width=400px align="center">
 <figcaption><i>Summary on Test-Std split, average of Furniture and Fashion.</i></figcaption>
 </figure>
 
@@ -41,7 +41,7 @@ Please checkout the challenge page, paper, and the Facebook AI blog for further 
 
 **Detailed Results** 
 
-<iframe src="https://docs.google.com/spreadsheets/d/e/2PACX-1vRPfjuesfrMrDoDZ34uNB8zDH2XutHc_ScXvao4PzUaCPXPM_uIu5hkJ2FSoByepgdEyk35Ti8lHha-/pubhtml?gid=1354274332&amp;single=true&amp;widget=true&amp;headers=false" width=600px></iframe>
+All the detailed results are [here](#9).
 
 
 [1]: https://github.com/facebookresearch/simmc
@@ -52,3 +52,4 @@ Please checkout the challenge page, paper, and the Facebook AI blog for further 
 [6]: https://github.com/boychaboy/simmc
 [7]: https://github.com/i2r-simmc/i2r-simmc-2020
 [8]: https://github.com/D2KLab/dstc9-SIMMC
+[9]: https://docs.google.com/spreadsheets/d/e/2PACX-1vRPfjuesfrMrDoDZ34uNB8zDH2XutHc_ScXvao4PzUaCPXPM_uIu5hkJ2FSoByepgdEyk35Ti8lHha-/pubhtml?gid=1354274332&amp;single=true&amp;widget=true&amp;headers=false
