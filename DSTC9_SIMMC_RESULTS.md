@@ -8,11 +8,11 @@ The challenge saw a total of **11** model entries from **5** teams across the wo
     * Action accuracy increased by 3 points (79.3% to 82.5%)
     * Action Attribute accuracy increased by ~10 points (63.7% to 73.9%)
 2. **Subtask 2 (Assistant Response Generation)**
-	* BLEU score increased by 0.067 points (0.061 to 0.128)
-	* Recall@1 increased by 45 points (7.2% to 52.6%)
+    * BLEU score increased by 0.067 points (0.061 to 0.128)
+    * Recall@1 increased by 45 points (7.2% to 52.6%)
 3. **Subtask 3 (Dialog State Tracking)**
-	* Slot F-1 increased by 16.7 points (62.4% to 79.1%)
-	* Intent F-1 increased by 16 points (62.1% to 78.1%)
+    * Slot F-1 increased by 16.7 points (62.4% to 79.1%)
+    * Intent F-1 increased by 16 points (62.1% to 78.1%)
 
 Congratulations to the winners and runners-up, and a big thanks to all the participants!
 
