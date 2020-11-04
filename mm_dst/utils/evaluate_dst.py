@@ -1,61 +1,5 @@
 #!/usr/bin/env python3
-"""
-    Util functions for evaluating the DST model predictions.
-    The script includes a main function which takes
-    the original JSON data file and the predicted model output file
-    (in the same format), and outputs the report.
-"""
-import argparse
-import json
-
-def evaluate_from_json(d_true, d_pred):
-    """
-        <list>d_true and <list>d_pred are in the following format:
-        (Equivalent to "dialogue_data" field in the input data JSON file)
-        [
-            {
-                "dialogue": [
-                    {
-                        "belief_state": [
-                            [
-                                {
-                                    'act': <str>,
-                                    'slots': [
-                                        [
-                                            SLOT_NAME, SLOT_VALUE
-                                        ], ...
-                                    ]
-                                },
-                                [End of a frame]
-                                ...
-                            ],
-                        ]
-                    }
-                    [End of a turn]
-                    ...                    
-                ],
-            }
-            [End of a dialogue]            
-            ...
-        ]
-    """
-    d_true_flattened = []
-    d_pred_flattened = []
-
-    for i in range(len(d_true)):
-        # Iterate through each dialog
-        dialog_true = d_true[i]['dialogue']
-        dialog_pred = d_pred[i]['dialogue']
-
-        for j in range(len(dialog_true)):
-            # Iterate through each turn
-            turn_true = dialog_true[j]['belief_state']
-            turn_pred = dialog_pred[j]['belief_state']
-
-            d_true_flattened.append(turn_true)
-            d_pred_flattened.append(turn_pred)
-
-    return evaluate_from_flat_list(d_true_flattened, d_pred_flattened)
+import numpy as np
 
 
 def evaluate_from_flat_list(d_true, d_pred):
@@ -113,14 +57,22 @@ def evaluate_from_flat_list(d_true, d_pred):
         2 * slot_prec * slot_rec / (slot_prec + slot_rec) \
             if (slot_prec + slot_rec) != 0 else 0
 
+    # Calculate std err
+    act_f1_stderr = \
+        d_f1(c['n_true_acts'], c['n_pred_acts'], c['n_correct_acts'])
+    slot_f1_stderr = \
+        d_f1(c['n_true_slots'], c['n_pred_slots'], c['n_correct_slots'])
+
     return {
         'joint_accuracy': joint_accuracy,
         'act_rec': act_rec,
         'act_prec': act_prec,
         'act_f1': act_f1,
+        'act_f1_stderr': act_f1_stderr,
         'slot_rec': slot_rec,
         'slot_prec': slot_prec,
         'slot_f1': slot_f1,
+        'slot_f1_stderr': slot_f1_stderr,
     }
 
 
@@ -179,8 +131,11 @@ def evaluate_frame(true_frame, pred_frame, strict=True):
     count_dict['n_pred_acts'] += 'act' in pred_frame
 
     # Compare Slots
-    true_frame_slot_values = {f'{k}={v}' for k, v in true_frame.get('slots', [])}
-    pred_frame_slot_values = {f'{k}={v}' for k, v in pred_frame.get('slots', [])}
+    true_frame_slot_values = \
+        set(f'{k}={v}' for k, v in true_frame.get('slots', []))
+
+    pred_frame_slot_values = \
+        set(f'{k}={v}' for k, v in pred_frame.get('slots', []))
 
     count_dict['n_true_slots'] += len(true_frame_slot_values)
     count_dict['n_pred_slots'] += len(pred_frame_slot_values)
@@ -201,30 +156,27 @@ def add_dicts(d1, d2):
     return {k: d1[k] + d2[k] for k in d1}
 
 
-if __name__ == '__main__':
-    # Parse input args
-    parser = argparse.ArgumentParser()
-    parser.add_argument('--input_path_target',
-                        help='path for target (.json)')
-    parser.add_argument('--input_path_predicted',
-                        help='path for model prediction output (.json)')
-    parser.add_argument('--output_path_report',
-                        help='path for saving evaluation summary (.json)')
+def d_f1(n_true, n_pred, n_correct):
+    # 1/r + 1/p = 2/F1
+    # dr / r + dp/p = 2dF1/ F1
+    # dr / r^2 + dp / p^2 = 2dF1 /F1^2
+    # dF1 = 1/2 F1^2 (dr/r^2 + dp/p^2) 
+    dr = b_stderr(n_true, n_correct)
+    dp = b_stderr(n_pred, n_correct)
 
-    args = parser.parse_args()
-    input_path_target = args.input_path_target
-    input_path_predicted = args.input_path_predicted
-    output_path_report = args.output_path_report
+    r = n_correct / n_true
+    p = n_correct / n_pred
+    f1 = 2 * p * r / (p + r)
 
-    # Read the JSON file input
-    # json_predicted must have the same structure as the original input JSON
-    # e.g. {'dialogue_data': [ ... ]}
-    json_target = json.load(open(input_path_target, 'r'))
-    json_predicted = json.load(open(input_path_predicted, 'r'))
+    d_f1 = 0.5 * f1**2 * (dr / r**2 + dp / p**2)
+    return d_f1
 
-    # Evaluate
-    report = evaluate_from_json(json_target['dialogue_data'], json_predicted['dialogue_data'])
 
-    # Save report
-    with open(output_path_report, 'w') as f_out:
-        json.dump(report, f_out)
+def b_stderr(n_total, n_pos):
+    return np.std(b_arr(n_total, n_pos)) / np.sqrt(n_total)
+
+
+def b_arr(n_total, n_pos):
+    out = np.zeros(int(n_total))
+    out[:int(n_pos)] = 1.0
+    return out

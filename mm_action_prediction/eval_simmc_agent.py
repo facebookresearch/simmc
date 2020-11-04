@@ -24,6 +24,9 @@ def main(args):
     checkpoint = torch.load(args["checkpoint"], map_location=torch.device("cpu"))
     saved_args = checkpoint["args"]
     saved_args.update(args)
+    # Save model outputs for teststd.
+    if "teststd" in args["eval_data_path"].rsplit("/", 1)[1]:
+        saved_args["save_model_output"] = True
     support.pretty_print_dict(saved_args)
 
     # Dataloader for evaluation.
@@ -87,23 +90,40 @@ def evaluate_agent(wizard, val_loader, args):
     avg_loss_eval = total_loss_sum / num_tokens
 
     # Compute BLEU score.
+    model_responses = None
+    bleu_score = -1.
     if args["bleu_evaluation"]:
         model_responses = [jj for ii in matches for jj in ii["model_response"]]
-        bleu_score = val_loader.evaluate_response_generation(model_responses)
-    else:
-        model_responses = None
-        bleu_score = -1.
+        # Save the JSON file.
+        if args.get("save_model_output", False):
+            save_path = args["checkpoint"].replace(".tar", "_response_gen.json")
+            with open(save_path, "w") as file_id:
+                json.dump(model_responses, file_id)
+        else:
+            bleu_score = val_loader.evaluate_response_generation(model_responses)
 
     # Evaluate retrieval score.
+    retrieval_metrics = {}
     if args["retrieval_evaluation"]:
         candidate_scores = [jj for ii in matches for jj in ii["candidate_scores"]]
-        retrieval_metrics = val_loader.evaluate_response_retrieval(candidate_scores)
-        print(retrieval_metrics)
-    else:
-        retrieval_metrics = {}
+        # Save the JSON file.
+        if args.get("save_model_output", False):
+            save_path = args["checkpoint"].replace(".tar", "_response_ret.json")
+            with open(save_path, "w") as file_id:
+                json.dump(candidate_scores, file_id)
+        else:
+            retrieval_metrics = val_loader.evaluate_response_retrieval(
+                candidate_scores
+            )
+            print(retrieval_metrics)
 
     # Evaluate action prediction.
     action_predictions = [jj for ii in matches for jj in ii["action_preds"]]
+    # Save the JSON file.
+    if args.get("save_model_output", False):
+        save_path = args["checkpoint"].replace(".tar", "_action_gen.json")
+        with open(save_path, "w") as file_id:
+            json.dump(action_predictions, file_id)
     action_metrics = val_loader.evaluate_action_prediction(action_predictions)
     print(action_metrics["confusion_matrix"])
     print_str = (
