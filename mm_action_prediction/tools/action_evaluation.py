@@ -25,7 +25,11 @@ IGNORE_ATTRIBUTES = [
 
 
 def evaluate_action_prediction(
-    gt_actions, model_actions, single_round_eval=False, compute_std_err=False
+    gt_actions,
+    model_actions,
+    single_round_eval=False,
+    compute_std_err=False,
+    record_instance_results=None,
 ):
     """Evaluates action prediction using the raw data and model predictions.
 
@@ -34,6 +38,7 @@ def evaluate_action_prediction(
         model_actions: Actions + attributes predicted by the model
         single_round_eval: Evaluate only for the last turn
         compute_std_err: Computes standard error for the metrics
+        record_instance_results: Record the result per instance
     """
     gt_actions_pool = {ii["dialog_id"]: ii for ii in gt_actions}
     matches = {"action": [], "attributes": [], "perplexity": []}
@@ -55,6 +60,11 @@ def evaluate_action_prediction(
                 round_datum["action_log_prob"][gt_datum["action"]]
             )
             confusion_dict[gt_datum["action"]].append(round_datum["action"])
+
+            # Add the result to datum and save it back.
+            if record_instance_results:
+                round_datum["action_result"] = action_match
+                round_datum["gt_action"] = gt_datum["action"]
 
             # Get supervision for action attributes.
             supervision = gt_datum["action_supervision"]
@@ -98,6 +108,11 @@ def evaluate_action_prediction(
                         matches["attributes"].append(gt_key_vals == model_key_vals)
 
     print("#Instances evaluated API: {}".format(len(matches["action"])))
+    # Record and save per instance results.
+    if record_instance_results:
+        print("Saving per instance result: {}".format(record_instance_results))
+        with open(record_instance_results, "w") as file_id:
+            json.dump(model_actions, file_id)
 
     # Compute the confusion matrix.
     all_actions = sorted(
@@ -145,11 +160,19 @@ def main(args):
     with open(args["model_output_path"], "r") as file_id:
         model_actions = json.load(file_id)
 
+    if args["record_instance_results"]:
+        instance_results_path = args["model_output_path"].replace(
+            ".json", "_results.json"
+        )
+    else:
+        instance_results_path = None
+
     action_metrics = evaluate_action_prediction(
         gt_actions,
         model_actions,
         args["single_round_evaluation"],
         args["compute_std_err"],
+        instance_results_path,
     )
 
     if args["compute_std_err"]:
@@ -183,6 +206,13 @@ if __name__ == "__main__":
         action="store_true",
         default=False,
         help="Computes standard error for the metrics",
+    )
+    parser.add_argument(
+        "--record_instance_results",
+        dest="record_instance_results",
+        action="store_true",
+        default=False,
+        help="Records per instance results and save it back",
     )
     try:
         parsed_args = vars(parser.parse_args())

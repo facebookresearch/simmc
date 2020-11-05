@@ -13,13 +13,16 @@ import numpy as np
 
 
 def normalize_sentence(sentence):
-    """Normalize the sentences and tokenize.
-    """
+    """Normalize the sentences and tokenize."""
     return nltk.tokenize.word_tokenize(sentence.lower())
 
 
 def evaluate_response_generation(
-    gt_responses, model_responses, single_round_eval=False, compute_std_err=False
+    gt_responses,
+    model_responses,
+    single_round_eval=False,
+    compute_std_err=False,
+    record_instance_results=None,
 ):
     """Evaluates response generation using the raw data and model predictions.
 
@@ -28,6 +31,7 @@ def evaluate_response_generation(
         model_responses: Generated responses.
         single_round_eval: Evaluate only for the last turn
         compute_std_err: Computes standard error for the metrics
+        record_instance_results: Path to record per instance results
     """
     gt_responses_pool = {ii["dialogue_idx"]: ii for ii in gt_responses["dialogue_data"]}
     bleu_scores = []
@@ -53,7 +57,17 @@ def evaluate_response_generation(
                 smoothing_function=chencherry.method1,
             )
             bleu_scores.append(bleu_score)
+
+            # Add the result to datum and save it back.
+            if record_instance_results:
+                round_datum["bleu"] = bleu_score
+                round_datum["response_len"] = len(normalize_sentence(gt_response))
     print("#Instances evaluated BLEU: {}".format(len(bleu_scores)))
+    # Record and save per instance results.
+    if record_instance_results:
+        print("Saving per instance result: {}".format(record_instance_results))
+        with open(record_instance_results, "w") as file_id:
+            json.dump(model_responses, file_id)
 
     bleu_std_err = np.std(bleu_scores) / np.sqrt(len(bleu_scores))
     if compute_std_err:
@@ -69,11 +83,20 @@ def main(args):
     print("Reading: {}".format(args["model_response_path"]))
     with open(args["model_response_path"], "r") as file_id:
         model_responses = json.load(file_id)
+
+    if args["record_instance_results"]:
+        instance_results_path = args["model_response_path"].replace(
+            ".json", "_results.json"
+        )
+    else:
+        instance_results_path = None
+
     bleu_score = evaluate_response_generation(
         gt_responses,
         model_responses,
         args["single_round_evaluation"],
         args["compute_std_err"],
+        instance_results_path,
     )
 
     if args["compute_std_err"]:
@@ -107,6 +130,13 @@ if __name__ == "__main__":
         action="store_true",
         default=False,
         help="Computes standard error for the metrics",
+    )
+    parser.add_argument(
+        "--record_instance_results",
+        dest="record_instance_results",
+        action="store_true",
+        default=False,
+        help="Records per instance results and save it back",
     )
     try:
         parsed_args = vars(parser.parse_args())
