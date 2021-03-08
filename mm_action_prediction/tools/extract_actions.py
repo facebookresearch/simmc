@@ -1117,6 +1117,8 @@ def get_roundwise_dialog_actions(subtask, dialog_actions):
                 "focus": raw_actions[-1][NEXT_STATE][SHARED_FOCUS],
                 "carousel": raw_actions[-1][NEXT_STATE][SHARED_CAROUSEL],
             }
+        else:
+            turn_carousel_state = action_output_state
     return roundwise_actions
 
 
@@ -1131,12 +1133,14 @@ def update_carousel_state(filtered_action, current_state):
         insert_carousal_state: Carousel state to insert for the action
         new_current_state: State of carousel after executing the action
     """
-    if filtered_action[API] != GET_INFO_ACTION:
+    # NOTE: For GetInfo, AddToCart, None actions, do not update the states.
+    ignore_actions = [GET_INFO_ACTION, ADD_TO_CART_ACTION, NONE_ACTION]
+    if filtered_action[API] not in ignore_actions:
         current_state = get_carousel_state(
             filtered_action["previousState"], filtered_action
         )
     insert_carousel_state = copy.deepcopy(current_state)
-    if filtered_action[API] != GET_INFO_ACTION:
+    if filtered_action[API] not in ignore_actions:
         current_state = get_carousel_state(
             filtered_action["nextState"], filtered_action
         )
@@ -1174,20 +1178,25 @@ def get_carousel_state(state=None, action_args=None):
         return new_state
 
     # Get items in the carousel.
+    search_order_carousel = ["prefabsInCarousel", "sharedPrefabsInCarousel"]
+    search_order_focus = ["prefabInFocus", "sharedPrefabInFocus"]
     action = action_args["api"]
-    if action == "SearchFurniture":
-        new_state["carousel"] = state["sharedPrefabsInCarousel"]
-    elif action in ["Rotate", "FocusOnFurniture"]:
+    if action in [
+        SEARCH_FURNITURE_ACTION,
+        NAVIGATE_CAROUSEL_ACTION
+    ]:
+        for order in search_order_carousel:
+            if state[order]:
+                new_state["carousel"] = state[order]
+                break
+    elif action in [ROTATE_ACTION, FOCUS_ON_FURNITURE_ACTION]:
         focus_id = action_args["args"]["furniture_id"]
-        search_order = ["prefabsInCarousel", "sharedPrefabsInCarousel"]
-        for order in search_order:
+        for order in search_order_carousel:
             if focus_id in state[order]:
                 new_state["carousel"] = state[order]
-    elif action in ["Previous", "Next"]:
-        new_state["carousel"] = state["prefabsInCarousel"]
+
     # Focus object.
-    search_order = ["prefabInFocus", "sharedPrefabInFocus"]
-    for key in search_order:
+    for key in search_order_focus:
         if state[key] != "":
             new_state["focus"] = state[key]
             break
