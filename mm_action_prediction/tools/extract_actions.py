@@ -1108,7 +1108,6 @@ def get_roundwise_dialog_actions(subtask, dialog_actions):
         action_datum["action"] = cur_action
         action_datum["action_supervision"] = cur_supervision
         action_datum["action_output_state"] = action_output_state
-        roundwise_actions.append(action_datum)
 
         # Go through all the raw_actions to get the next turn_state.
         raw_actions = turn_datum["raw_action_with_args"]
@@ -1119,6 +1118,10 @@ def get_roundwise_dialog_actions(subtask, dialog_actions):
             }
         else:
             turn_carousel_state = action_output_state
+
+        # Also record the final carousel_state.
+        action_datum["final_carousel_state"] = deepcopy.copy(turn_carousel_state)
+        roundwise_actions.append(action_datum)
     return roundwise_actions
 
 
