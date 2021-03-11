@@ -1188,7 +1188,9 @@ def get_carousel_state(state=None, action_args=None):
         for order in search_order_carousel:
             if state[order]:
                 new_state["carousel"] = state[order]
-                break
+                # break loop and return - don't return focus item
+                # SearchFurniture and NavigateCarousel actions
+                return new_state
     elif action in [ROTATE_ACTION, FOCUS_ON_FURNITURE_ACTION]:
         focus_id = action_args["args"]["furniture_id"]
         for order in search_order_carousel:
