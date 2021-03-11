@@ -1138,10 +1138,7 @@ def update_carousel_state(filtered_action, current_state):
     """
     # NOTE: For GetInfo, AddToCart, None actions, do not update the states.
     ignore_actions = [GET_INFO_ACTION, ADD_TO_CART_ACTION, NONE_ACTION]
-    if filtered_action[API] not in ignore_actions:
-        current_state = get_carousel_state(
-            filtered_action["previousState"], filtered_action
-        )
+    # action shouldn't effect the view of the previous state
     insert_carousel_state = copy.deepcopy(current_state)
     if filtered_action[API] not in ignore_actions:
         current_state = get_carousel_state(
