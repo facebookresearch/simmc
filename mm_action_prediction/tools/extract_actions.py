@@ -723,6 +723,13 @@ def extract_actions(input_json_file, save_root, furniture_db, subtask):
             insert_item["current_search_results"] = copy.deepcopy(search_results)
             chat_utterances.append(insert_item)
 
+        # if dialog_id == 18702 or dialog_id == "18702":
+        #     print("Here:")
+        #     for turn_datum in chat_utterances:
+        #         print([ii["api"] for ii in turn_datum["raw_action_with_args"]])
+        #     import pdb; pdb.set_trace()
+        #     pass
+
         roundwise_actions = get_roundwise_dialog_actions(
             subtask,
             chat_utterances
@@ -1073,7 +1080,6 @@ def get_roundwise_dialog_actions(subtask, dialog_actions):
                 # for GET_INFO_ACTION and ADD_TO_CART_ACTION subtask create a
                 # single reference relative to the carousel
                 furniture_ids = cur_supervision[ARGS][FURNITURE_ID]
-                # {'focus': '', 'carousel': ['901712', '1215555']}
                 if turn_carousel_state["focus"]:
                     if turn_carousel_state["focus"] in furniture_ids:
                         cur_supervision[ARGS][FURNITURE_ID] = "focus"
@@ -1109,10 +1115,11 @@ def get_roundwise_dialog_actions(subtask, dialog_actions):
         action_datum["action_supervision"] = cur_supervision
         action_datum["action_output_state"] = action_output_state
 
-        # Go through all the raw_actions to get the next turn_state.
+        # Go through all the raw_actions to get the next turn_state 
+        # (only if Share is the last action)
         raw_actions = turn_datum["raw_action_with_args"]
         for raw_act in raw_actions:
-            if raw_act[API] == "Share":
+            if raw_act[API] == SHARE:
                 turn_carousel_state = {
                     "focus": raw_act[NEXT_STATE][SHARED_FOCUS],
                     "carousel": raw_act[NEXT_STATE][SHARED_CAROUSEL],
