@@ -1111,16 +1111,15 @@ def get_roundwise_dialog_actions(subtask, dialog_actions):
 
         # Go through all the raw_actions to get the next turn_state.
         raw_actions = turn_datum["raw_action_with_args"]
-        if len(raw_actions):
-            turn_carousel_state = {
-                "focus": raw_actions[-1][NEXT_STATE][SHARED_FOCUS],
-                "carousel": raw_actions[-1][NEXT_STATE][SHARED_CAROUSEL],
-            }
-        else:
-            turn_carousel_state = action_output_state
+        for raw_act in raw_actions:
+            if raw_act[API] == "Share":
+                turn_carousel_state = {
+                    "focus": raw_act[NEXT_STATE][SHARED_FOCUS],
+                    "carousel": raw_act[NEXT_STATE][SHARED_CAROUSEL],
+                }
 
         # Also record the final carousel_state.
-        action_datum["final_carousel_state"] = deepcopy.copy(turn_carousel_state)
+        action_datum["final_carousel_state"] = copy.deepcopy(turn_carousel_state)
         roundwise_actions.append(action_datum)
     return roundwise_actions
 
