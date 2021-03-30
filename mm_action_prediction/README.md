@@ -16,6 +16,7 @@ We also measure the correctness of the predicted action (API) arguments using at
 Specifically, the following API classes and attributes are evaluated.
 
 **SIMMC-Furniture**
+
 |  API   |  API Attributes |
 |:------:| :--------: |
 | `SearchFurniture`  | `furnitureType`, `color` |
@@ -30,6 +31,7 @@ Each of the above attributes is a categorical variable, modeled as multiclass cl
 **Note:** `minPrice` and `maxPrice` attributes corresponding to the `SpecifyInfo` action for Furniture are excluded in the current evaluation.
 
 **SIMMC-Fashion**
+
 | API  |   API Attributes |
 |:--------: | :------: |
 | `SearchDatabase` | `attributes` |
@@ -204,6 +206,8 @@ The baselines trained through the code obtain the following results for Sub-Task
 | HRE    | 81.9 | 1.76 | 62.1 |
 | MN     | 81.6 | 1.74 | 61.6 |
 | T-HAE  | 81.4 | 1.78 | 62.1 |
+
+**Note:** DSTC9 SIMMC Challenge was conducted on SIMMC v1.0. Thus all the results and baseline performances are on SIMMC v1.0.
 
 
 ## Rules for Sub-task #1 Submissions

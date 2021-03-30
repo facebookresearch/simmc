@@ -17,12 +17,17 @@ Our challenge focuses on our SIMMC datasets, both of which are shopping domains:
 </figure>
 
 
+
 ### Latest News
 
+* **[Sept 28, 2020]** Released screenshots for SIMMC-Furniture [here][screenshot_link]. Also released improved API calls with newer heuristics as SIMMC v1.2 ([PR][screenshot_pr]).
+* **[Dec 29, 2020]** Fixed the errors in text spans for both SIMMC-Furniture and SIMMC-Fashion, released new JSON files as SIMMC v1.1 ([PR][span_fix_pr]).
 * **[Sept 28, 2020]** Test-Std data released, End of Challenge Phase 1.
-* **[June 22, 2020]** Challenge announcement. Training / development datasets are released.
-* **[July 8, 2020]** Evaluation scripts and code to train baselines for 
-Sub-Task #1, Sub-Task #2 released.
+* **[July 8, 2020]** Evaluation scripts and code to train baselines for Sub-Task #1, Sub-Task #2 released.
+* **[June 22, 2020]** Challenge announcement. Training / development datasets (SIMMC v1.0) are released.
+
+**Note:** DSTC9 SIMMC Challenge was conducted on SIMMC v1.0. Thus all the results and baseline performances are on SIMMC v1.0.
+
 
 ## Important Links
 
@@ -149,3 +154,6 @@ SIMMC is released under [CC-BY-NC-SA-4.0](https://creativecommons.org/licenses/b
 
 [dstc9]:https://sites.google.com/dstc.community/dstc9/home
 [simmc_arxiv]:https://arxiv.org/abs/2006.01460
+[screenshot_link]:./data/simmc_furniture/furniture_screenshots.zip
+[span_fix_pr]:https://github.com/facebookresearch/simmc/pull/54
+[screenshot_pr]:https://github.com/facebookresearch/simmc/pull/60
