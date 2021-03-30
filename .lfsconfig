@@ -1,0 +1,2 @@
+[lfs]
+fetchexclude = data/simmc_furniture/*.zip
