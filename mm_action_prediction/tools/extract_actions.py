@@ -723,13 +723,6 @@ def extract_actions(input_json_file, save_root, furniture_db, subtask):
             insert_item["current_search_results"] = copy.deepcopy(search_results)
             chat_utterances.append(insert_item)
 
-        # if dialog_id == 18702 or dialog_id == "18702":
-        #     print("Here:")
-        #     for turn_datum in chat_utterances:
-        #         print([ii["api"] for ii in turn_datum["raw_action_with_args"]])
-        #     import pdb; pdb.set_trace()
-        #     pass
-
         roundwise_actions = get_roundwise_dialog_actions(
             subtask,
             chat_utterances
