@@ -186,6 +186,8 @@ Below is the summary of the [published models](https://github.com/facebookresear
 | GPT2 - Fashion (text-only) | 61.2 | 52.1 |
 | GPT2 - Fashion (multimodal) | 61.1 | 60.6 |
 
+**Note:** DSTC9 SIMMC Challenge was conducted on SIMMC v1.0. Thus all the results and baseline performances are on SIMMC v1.0.
+
 ## Rules for Sub-task #3 Submissions
 * Disallowed input per each turn: `belief_state`, `system_transcript`, `system_transcript_annotated`, `state_graph_1`, `state_graph_2`, and anything from future turns.
 * If you would like to use any other external resources, please consult with the track organizers (simmc@fb.com). Generally, we allow the use of publicly available pre-trained language models, such as BERT, GPT-2, etc.
