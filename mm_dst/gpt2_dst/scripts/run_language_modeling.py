@@ -230,7 +230,7 @@ def train(args, train_dataset, model: PreTrainedModel, tokenizer: PreTrainedToke
     else:
         t_total = len(train_dataloader) // args.gradient_accumulation_steps * args.num_train_epochs
 
-    model = model.module if hasattr(model, "module") else model  # Take care of distributed/parallel training
+    model = getattr(model, "module", model)  # Take care of distributed/parallel training
     model.resize_token_embeddings(len(tokenizer))
 
     # Prepare optimizer and schedule (linear warmup and decay)
@@ -370,7 +370,7 @@ def train(args, train_dataset, model: PreTrainedModel, tokenizer: PreTrainedToke
                     output_dir = os.path.join(args.output_dir, "{}-{}".format(checkpoint_prefix, global_step))
                     os.makedirs(output_dir, exist_ok=True)
                     model_to_save = (
-                        model.module if hasattr(model, "module") else model
+                        getattr(model, "module", model)
                     )  # Take care of distributed/parallel training
                     model_to_save.save_pretrained(output_dir)
                     tokenizer.save_pretrained(output_dir)
@@ -762,7 +762,7 @@ def main():
         # Save a trained model, configuration and tokenizer using `save_pretrained()`.
         # They can then be reloaded using `from_pretrained()`
         model_to_save = (
-            model.module if hasattr(model, "module") else model
+            getattr(model, "module", model)
         )  # Take care of distributed/parallel training
         model_to_save.save_pretrained(args.output_dir)
         tokenizer.save_pretrained(args.output_dir)
