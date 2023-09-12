@@ -461,7 +461,7 @@ class DataloaderSIMMC(loaders.LoaderParent):
             {
                 "user_utt": enc_in,
                 "user_utt_len": enc_len,
-                "dialog_mask": np.ones((1, 1), dtype=np.bool),
+                "dialog_mask": np.ones((1, 1), dtype=bool),
                 "round_id": np.array([round_id], dtype="int32"),
             }
         )
