@@ -104,7 +104,7 @@ class LoaderParent:
         # int32 get mapped to int64 and float to double
         if numpy_array.dtype == np.int32 or numpy_array.dtype == np.int64:
             new_type = torch.int64
-        elif numpy_array.dtype == np.bool:
+        elif numpy_array.dtype == bool:
             new_type = torch.bool
         else:
             new_type = torch.float
